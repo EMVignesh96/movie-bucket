@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2020 Vignesh
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,10 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Movie Bucket</string>
-    <string name="title_activity_main">@string/app_name</string>
-    <string name="title_shuffle">Shuffle</string>
-    <string name="title_bucket_list">List</string>
-    <string name="title_search">Search</string>
-    <string name="title_settings">Settings</string>
-    <string name="title_api_key">OMDb API Key</string>
-    <string name="summary_api_key">Enter the API key generated from OMDb website</string>
-</resources>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:icon="@drawable/ic_key_24dp"
+        android:key="api_key"
+        android:summary="@string/summary_api_key"
+        android:title="@string/title_api_key" />
+</PreferenceScreen>

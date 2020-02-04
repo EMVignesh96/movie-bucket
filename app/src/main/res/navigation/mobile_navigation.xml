@@ -37,4 +37,8 @@
         android:name="com.vignesh.moviebucket.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.vignesh.moviebucket.ui.settings.SettingsFragment"
+        android:label="@string/title_settings" />
 </navigation>
