@@ -1,4 +1,4 @@
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2020 Vignesh
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,21 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Movie Bucket</string>
-    <string name="title_activity_main">@string/app_name</string>
-    <string name="title_shuffle">Shuffle</string>
-    <string name="title_bucket_list">List</string>
-    <string name="title_search">Search</string>
-</resources>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_shuffle"
+        android:icon="@drawable/ic_shuffle_24dp"
+        android:title="@string/title_shuffle" />
+
+    <item
+        android:id="@+id/navigation_list"
+        android:icon="@drawable/ic_list_24dp"
+        android:title="@string/title_bucket_list" />
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="@string/title_search" />
+
+</menu>

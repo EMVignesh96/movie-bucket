@@ -15,9 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Movie Bucket</string>
-    <string name="title_activity_main">@string/app_name</string>
-    <string name="title_shuffle">Shuffle</string>
-    <string name="title_bucket_list">List</string>
-    <string name="title_search">Search</string>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>
