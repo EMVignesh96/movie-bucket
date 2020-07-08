@@ -18,7 +18,7 @@
     <string name="app_name">Movie Bucket</string>
     <string name="title_activity_main">@string/app_name</string>
     <string name="title_shuffle">Shuffle</string>
-    <string name="title_bucket_list">List</string>
+    <string name="title_bucket_list">Bucket List</string>
     <string name="title_search">Search</string>
     <string name="title_settings">Settings</string>
     <string name="title_api_key">OMDb API Key</string>
