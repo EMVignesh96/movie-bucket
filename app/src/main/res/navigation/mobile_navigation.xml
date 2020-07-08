@@ -18,13 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_shuffle">
-
-    <fragment
-        android:id="@+id/navigation_shuffle"
-        android:name="com.vignesh.moviebucket.ui.shuffle.ShuffleFragment"
-        android:label="@string/title_shuffle"
-        tools:layout="@layout/fragment_shuffle" />
+    app:startDestination="@+id/navigation_list">
 
     <fragment
         android:id="@+id/navigation_list"
@@ -37,8 +31,4 @@
         android:name="com.vignesh.moviebucket.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.vignesh.moviebucket.ui.settings.SettingsFragment"
-        android:label="@string/title_settings" />
 </navigation>
