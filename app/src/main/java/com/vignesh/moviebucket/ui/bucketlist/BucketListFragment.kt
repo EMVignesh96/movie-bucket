@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.vignesh.moviebucket.R
+import com.vignesh.moviebucket.util.obtainViewModel
 
 class BucketListFragment : Fragment() {
 
@@ -35,11 +35,10 @@ class BucketListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bucketListViewModel =
-            ViewModelProviders.of(this).get(BucketListViewModel::class.java)
+        bucketListViewModel = obtainViewModel(BucketListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        bucketListViewModel.text.observe(this, Observer {
+        bucketListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -23,8 +23,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.vignesh.moviebucket.R
+import com.vignesh.moviebucket.util.obtainViewModel
 
 class SearchFragment : Fragment() {
 
@@ -35,11 +35,10 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchViewModel =
-            ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        searchViewModel = obtainViewModel(SearchViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        searchViewModel.text.observe(this, Observer {
+        searchViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
