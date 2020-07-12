@@ -1,7 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="Apache License 2.0">
+  <settings default="V App Factory">
     <module2copyright>
-      <element module="All" copyright="Apache License 2.0" />
+      <element module="All" copyright="V App Factory" />
     </module2copyright>
   </settings>
 </component>
