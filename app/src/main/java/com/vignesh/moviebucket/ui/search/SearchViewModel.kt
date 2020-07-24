@@ -22,8 +22,17 @@ import androidx.lifecycle.ViewModel
 
 class SearchViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is search Fragment"
+    private val _searchResult = MutableLiveData<List<String>>()
+    val searchResult: LiveData<List<String>>
+        get() = _searchResult
+
+
+    fun search(query: String) {
+        val list = mutableListOf<String>()
+        for (i in 0 until 10) {
+            list.add("$query $i")
+        }
+        _searchResult.value = list
     }
-    val text: LiveData<String> = _text
+
 }
