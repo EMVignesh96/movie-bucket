@@ -44,31 +44,11 @@ class SearchFragment : Fragment() {
     ): View? {
         searchViewModel = obtainViewModel(SearchViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        setHasOptionsMenu(true)
 
         searchViewModel.searchResult.observe(viewLifecycleOwner, Observer {
 
         })
 
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-        val searchItem: MenuItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (!query.isNullOrEmpty()) searchViewModel.search(query)
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-        })
-        return super.onCreateOptionsMenu(menu, inflater)
     }
 }
