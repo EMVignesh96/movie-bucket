@@ -22,12 +22,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentLibraryBinding
+import com.vignesh.moviebucket.util.obtainViewModel
 
 class LibraryFragment : Fragment() {
 
     private lateinit var binding: FragmentLibraryBinding
+    private lateinit var viewModel: LibraryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,8 @@ class LibraryFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
 
+        viewModel = obtainViewModel(LibraryViewModel::class.java)
+
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
             val topInset = windowInsets.systemWindowInsetTop
             view.layoutParams.height = topInset
@@ -43,6 +49,79 @@ class LibraryFragment : Fragment() {
             return@setOnApplyWindowInsetsListener windowInsets
         }
 
+        setUpRecyclerViews()
+
+        observeData()
+
         return binding.root
+    }
+
+    private fun observeData() {
+
+        with(viewModel) {
+            popularMovies.observe(viewLifecycleOwner, Observer { popularMovies ->
+
+            })
+
+            topRatedMovies.observe(viewLifecycleOwner, Observer { topRatedMovies ->
+
+            })
+
+            upcomingMovies.observe(viewLifecycleOwner, Observer { upcomingMovies ->
+
+            })
+
+            likedMovies.observe(viewLifecycleOwner, Observer { likedMovies ->
+
+            })
+
+            watchedMovies.observe(viewLifecycleOwner, Observer { watchedMovies ->
+
+            })
+        }
+    }
+
+    private fun setUpRecyclerViews() {
+        with(binding) {
+            popularMoviesRecycler.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+
+            topRatedMoviesRecycler.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+
+            upcomingMoviesRecycler.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+
+            likedMoviesRecycler.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+
+            watchedMoviesRecycler.apply {
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+        }
     }
 }

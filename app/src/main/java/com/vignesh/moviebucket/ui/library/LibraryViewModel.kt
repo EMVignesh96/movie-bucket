@@ -16,7 +16,31 @@
 
 package com.vignesh.moviebucket.ui.library
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.vignesh.moviebucket.data.model.Movie
 
 class LibraryViewModel : ViewModel() {
+
+    private val _popularMovies = MutableLiveData<List<Movie>>()
+    val popularMovies: LiveData<List<Movie>>
+        get() = _popularMovies
+
+    private val _topRatedMovies = MutableLiveData<List<Movie>>()
+    val topRatedMovies: LiveData<List<Movie>>
+        get() = _topRatedMovies
+
+    private val _upcomingMovies = MutableLiveData<List<Movie>>()
+    val upcomingMovies: LiveData<List<Movie>>
+        get() = _upcomingMovies
+
+    private val _likedMovies = MutableLiveData<List<Movie>>()
+    val likedMovies: LiveData<List<Movie>>
+        get() = _likedMovies
+
+    private val _watchedMovies = MutableLiveData<List<Movie>>()
+    val watchedMovies: LiveData<List<Movie>>
+        get() = _watchedMovies
+
 }

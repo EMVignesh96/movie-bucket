@@ -19,6 +19,7 @@ package com.vignesh.moviebucket
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vignesh.moviebucket.ui.bucketlist.BucketListViewModel
+import com.vignesh.moviebucket.ui.library.LibraryViewModel
 import com.vignesh.moviebucket.ui.search.SearchViewModel
 
 class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
@@ -27,6 +28,7 @@ class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
             return when {
                 isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
                 isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel()
+                isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel()
                 else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             } as T
         }
