@@ -44,6 +44,15 @@ class SearchFragment : Fragment() {
 
         })
 
+        binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
+            val topInset = windowInsets.systemWindowInsetTop
+            if (view.layoutParams.height != topInset) {
+                view.layoutParams.height = topInset
+                view.requestLayout()
+            }
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
+
         return binding.root
     }
 }
