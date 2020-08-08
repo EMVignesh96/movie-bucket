@@ -19,28 +19,39 @@ package com.vignesh.moviebucket.ui.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.switchMap
+import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
+import com.vignesh.moviebucket.data.source.MovieRepository
 
-class LibraryViewModel : ViewModel() {
+class LibraryViewModel(private val movieRepo: MovieRepository) : ViewModel() {
 
-    private val _popularMovies = MutableLiveData<List<Movie>>()
-    val popularMovies: LiveData<List<Movie>>
-        get() = _popularMovies
+    val popularMovies =
+        movieRepo.observeLikedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
 
-    private val _topRatedMovies = MutableLiveData<List<Movie>>()
-    val topRatedMovies: LiveData<List<Movie>>
-        get() = _topRatedMovies
+    val topRatedMovies =
+        movieRepo.observeTopRatedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
 
-    private val _upcomingMovies = MutableLiveData<List<Movie>>()
-    val upcomingMovies: LiveData<List<Movie>>
-        get() = _upcomingMovies
+    val upcomingMovies =
+        movieRepo.observeUpcomingMovies().distinctUntilChanged().switchMap { filterMovies(it) }
 
-    private val _likedMovies = MutableLiveData<List<Movie>>()
-    val likedMovies: LiveData<List<Movie>>
-        get() = _likedMovies
+    val likedMovies =
+        movieRepo.observeLikedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
 
-    private val _watchedMovies = MutableLiveData<List<Movie>>()
-    val watchedMovies: LiveData<List<Movie>>
-        get() = _watchedMovies
+    val watchedMovies =
+        movieRepo.observeWatchedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    private fun filterMovies(movieResult: Result<List<Movie>>): LiveData<List<Movie>> {
+        val result = MutableLiveData<List<Movie>>()
+
+        if (movieResult is Result.Success) {
+            result.value = movieResult.data
+        } else {
+            result.value = emptyList()
+        }
+
+        return result
+    }
 
 }

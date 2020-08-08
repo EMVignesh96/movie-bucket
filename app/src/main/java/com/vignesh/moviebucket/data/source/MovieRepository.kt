@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket.data.model
+package com.vignesh.moviebucket.data.source
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.lifecycle.LiveData
+import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.Movie
 
-@Entity(tableName = "movies")
-data class Movie(
-    @PrimaryKey val id: String,
-    val title: String,
-    val releaseDate: Long,
-    val runtimeMinutes: Int,
-    val rating: Float,
-    val genre: String,
-    val overView: String,
-    val cast: String,
-    val posterUrl: String,
-    val inBucket: Boolean = false,
-    val isLiked: Boolean = false,
-    val isWatched: Boolean = false,
-    val libraryItemType: Int = 0
-)
+interface MovieRepository {
+
+    fun observePopularMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeTopRatedMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeUpcomingMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeLikedMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
+}

@@ -17,17 +17,16 @@
 package com.vignesh.moviebucket
 
 import android.app.Application
+import com.facebook.stetho.Stetho
+import com.vignesh.moviebucket.data.source.MovieRepository
 
 class MovieBucketApp : Application() {
+
+    val movieRepository: MovieRepository
+        get() = ServiceLocator.provideMovieRepository(this)
+
     override fun onCreate() {
         super.onCreate()
-        INSTANCE = this
-    }
-
-    companion object {
-
-        private var INSTANCE: MovieBucketApp? = null
-
-        fun getInstance() = INSTANCE!!
+        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
     }
 }

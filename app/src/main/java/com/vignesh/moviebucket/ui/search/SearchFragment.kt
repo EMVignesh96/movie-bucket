@@ -22,14 +22,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentSearchBinding
-import com.vignesh.moviebucket.util.obtainViewModel
+import com.vignesh.moviebucket.util.getViewModelFactory
 
 class SearchFragment : Fragment() {
 
-    private lateinit var searchViewModel: SearchViewModel
+    private val viewModel by viewModels<SearchViewModel> { getViewModelFactory() }
     private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
@@ -37,10 +38,9 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchViewModel = obtainViewModel(SearchViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        searchViewModel.searchResult.observe(viewLifecycleOwner, Observer {
+        viewModel.searchResult.observe(viewLifecycleOwner, Observer {
 
         })
 

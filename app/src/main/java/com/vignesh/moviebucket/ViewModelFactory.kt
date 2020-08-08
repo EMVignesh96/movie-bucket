@@ -16,33 +16,31 @@
 
 package com.vignesh.moviebucket
 
+import android.os.Bundle
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.savedstate.SavedStateRegistryOwner
+import com.vignesh.moviebucket.data.source.MovieRepository
 import com.vignesh.moviebucket.ui.bucketlist.BucketListViewModel
 import com.vignesh.moviebucket.ui.library.LibraryViewModel
 import com.vignesh.moviebucket.ui.search.SearchViewModel
 
-class ViewModelFactory : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        with(modelClass) {
-            return when {
-                isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
-                isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel()
-                isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel()
-                else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
-            } as T
+class ViewModelFactory(
+    private val movieRepository: MovieRepository,
+    owner: SavedStateRegistryOwner,
+    defaultArgs: Bundle? = null
+) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
+    override fun <T : ViewModel> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ) = with(modelClass) {
+        when {
+            isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
+            isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel()
+            isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel(movieRepository)
+            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-    }
-
-    companion object {
-
-        @Volatile
-        private var INSTANCE: ViewModelFactory? = null
-
-        fun getInstance() =
-            INSTANCE ?: synchronized(ViewModelFactory::class.java) {
-                INSTANCE ?: ViewModelFactory()
-                    .also { INSTANCE = it }
-            }
-    }
+    } as T
 }

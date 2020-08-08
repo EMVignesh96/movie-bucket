@@ -17,21 +17,25 @@
 package com.vignesh.moviebucket.ui.library
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentLibraryBinding
-import com.vignesh.moviebucket.util.obtainViewModel
+import com.vignesh.moviebucket.util.getViewModelFactory
+
+var TAG: String = LibraryFragment::class.java.simpleName
 
 class LibraryFragment : Fragment() {
 
     private lateinit var binding: FragmentLibraryBinding
-    private lateinit var viewModel: LibraryViewModel
+    private val viewModel by viewModels<LibraryViewModel> { getViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +43,6 @@ class LibraryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
-
-        viewModel = obtainViewModel(LibraryViewModel::class.java)
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
             val topInset = windowInsets.systemWindowInsetTop
@@ -60,23 +62,23 @@ class LibraryFragment : Fragment() {
 
         with(viewModel) {
             popularMovies.observe(viewLifecycleOwner, Observer { popularMovies ->
-
+                Log.d(TAG, "popularMovies $popularMovies")
             })
 
             topRatedMovies.observe(viewLifecycleOwner, Observer { topRatedMovies ->
-
+                Log.d(TAG, "topRatedMovies $topRatedMovies")
             })
 
             upcomingMovies.observe(viewLifecycleOwner, Observer { upcomingMovies ->
-
+                Log.d(TAG, "upcomingMovies $upcomingMovies")
             })
 
             likedMovies.observe(viewLifecycleOwner, Observer { likedMovies ->
-
+                Log.d(TAG, "likedMovies $likedMovies")
             })
 
             watchedMovies.observe(viewLifecycleOwner, Observer { watchedMovies ->
-
+                Log.d(TAG, "watchedMovies $watchedMovies")
             })
         }
     }

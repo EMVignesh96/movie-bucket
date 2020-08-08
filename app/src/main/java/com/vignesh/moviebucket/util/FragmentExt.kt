@@ -17,10 +17,10 @@
 package com.vignesh.moviebucket.util
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.vignesh.moviebucket.MovieBucketApp
 import com.vignesh.moviebucket.ViewModelFactory
 
-fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProvider(this, ViewModelFactory.getInstance())
-        .get(viewModelClass)
+fun Fragment.getViewModelFactory(): ViewModelFactory {
+    val repository = (requireContext().applicationContext as MovieBucketApp).movieRepository
+    return ViewModelFactory(repository, this)
+}
