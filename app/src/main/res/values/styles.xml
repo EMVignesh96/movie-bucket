@@ -27,9 +27,19 @@
         <item name="android:windowBackground">@drawable/app_background</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MovieBucket.Headline3</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MovieBucket.Headline6</item>
     </style>
 
     <style name="Widget.MovieBucket.BottomNavigationView.Colored" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="fontFamily">@font/open_sans_bold</item>
+    </style>
+
+    <style name="TextAppearance.MovieBucket.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/open_sans_bold</item>
+    </style>
+
+    <style name="TextAppearance.MovieBucket.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/open_sans_bold</item>
     </style>
 

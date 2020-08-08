@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket
+package com.vignesh.moviebucket.data.source.local
 
-import android.app.Application
-import com.facebook.stetho.Stetho
-import com.vignesh.moviebucket.data.source.MovieRepository
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.vignesh.moviebucket.data.model.Movie
 
-class MovieBucketApp : Application() {
-
-    val movieRepository: MovieRepository
-        get() = ServiceLocator.provideMovieRepository(this)
-
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-    }
+@Database(entities = [Movie::class], version = 1)
+abstract class MovieDatabase : RoomDatabase() {
+    abstract fun moviesDao(): MoviesDao
 }

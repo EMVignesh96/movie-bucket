@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket
+package com.vignesh.moviebucket.data.model
 
-import android.app.Application
-import com.facebook.stetho.Stetho
-import com.vignesh.moviebucket.data.source.MovieRepository
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class MovieBucketApp : Application() {
-
-    val movieRepository: MovieRepository
-        get() = ServiceLocator.provideMovieRepository(this)
-
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-    }
-}
+@Entity(tableName = "movies")
+data class Movie(
+    @PrimaryKey val id: String,
+    val title: String,
+    val releaseDate: Long,
+    val runtimeMinutes: Int,
+    val rating: Float,
+    val genre: String,
+    val overView: String,
+    val cast: String,
+    val posterUrl: String,
+    val inBucket: Boolean = false,
+    val isLiked: Boolean = false,
+    val isWatched: Boolean = false,
+    val libraryItemType: Int = 0
+)

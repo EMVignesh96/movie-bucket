@@ -16,7 +16,42 @@
 
 package com.vignesh.moviebucket.ui.library
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.switchMap
+import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.Movie
+import com.vignesh.moviebucket.data.source.MovieRepository
 
-class LibraryViewModel : ViewModel() {
+class LibraryViewModel(private val movieRepo: MovieRepository) : ViewModel() {
+
+    val popularMovies =
+        movieRepo.observeLikedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    val topRatedMovies =
+        movieRepo.observeTopRatedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    val upcomingMovies =
+        movieRepo.observeUpcomingMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    val likedMovies =
+        movieRepo.observeLikedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    val watchedMovies =
+        movieRepo.observeWatchedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+
+    private fun filterMovies(movieResult: Result<List<Movie>>): LiveData<List<Movie>> {
+        val result = MutableLiveData<List<Movie>>()
+
+        if (movieResult is Result.Success) {
+            result.value = movieResult.data
+        } else {
+            result.value = emptyList()
+        }
+
+        return result
+    }
+
 }

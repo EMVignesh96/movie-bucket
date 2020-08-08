@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket
+package com.vignesh.moviebucket.data.source.local
 
-import android.app.Application
-import com.facebook.stetho.Stetho
-import com.vignesh.moviebucket.data.source.MovieRepository
+import androidx.lifecycle.LiveData
+import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.Movie
 
-class MovieBucketApp : Application() {
+interface LocalDataSource {
+    fun observePopularMovies(): LiveData<Result<List<Movie>>>
 
-    val movieRepository: MovieRepository
-        get() = ServiceLocator.provideMovieRepository(this)
+    fun observeTopRatedMovies(): LiveData<Result<List<Movie>>>
 
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-    }
+    fun observeUpcomingMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeLikedMovies(): LiveData<Result<List<Movie>>>
+
+    fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
 }

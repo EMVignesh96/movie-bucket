@@ -14,19 +14,6 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket
+package com.vignesh.moviebucket.data.source.remote
 
-import android.app.Application
-import com.facebook.stetho.Stetho
-import com.vignesh.moviebucket.data.source.MovieRepository
-
-class MovieBucketApp : Application() {
-
-    val movieRepository: MovieRepository
-        get() = ServiceLocator.provideMovieRepository(this)
-
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) Stetho.initializeWithDefaults(this)
-    }
-}
+object MovieRemoteDataSource : RemoteDataSource

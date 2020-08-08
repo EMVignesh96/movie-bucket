@@ -37,14 +37,6 @@ class MainActivity : AppCompatActivity() {
             root.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            topView.setOnApplyWindowInsetsListener { view, windowInsets ->
-                val topInset = windowInsets.systemWindowInsetTop
-                if (view.layoutParams.height != topInset) {
-                    view.layoutParams.height = topInset
-                    view.requestLayout()
-                }
-                return@setOnApplyWindowInsetsListener windowInsets
-            }
         }
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
