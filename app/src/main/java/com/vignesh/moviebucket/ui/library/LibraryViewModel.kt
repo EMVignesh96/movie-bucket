@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket.ui.bucketlist
+package com.vignesh.moviebucket.ui.library
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class BucketListViewModel : ViewModel()
+class LibraryViewModel : ViewModel() {
+}

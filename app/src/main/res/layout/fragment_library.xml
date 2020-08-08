@@ -14,21 +14,9 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_list"
-        android:icon="@drawable/ic_list_24dp"
-        android:title="@string/title_bucket_list" />
-
-    <item
-        android:id="@+id/navigation_library"
-        android:icon="@drawable/ic_baseline_subscriptions_24"
-        android:title="@string/title_library" />
-
-    <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_search_24dp"
-        android:title="@string/title_search" />
-
-</menu>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</layout>

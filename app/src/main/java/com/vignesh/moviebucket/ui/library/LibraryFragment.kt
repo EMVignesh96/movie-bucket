@@ -14,33 +14,27 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket.ui.bucketlist
+package com.vignesh.moviebucket.ui.library
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.vignesh.moviebucket.R
-import com.vignesh.moviebucket.databinding.FragmentListBinding
-import com.vignesh.moviebucket.util.obtainViewModel
+import com.vignesh.moviebucket.databinding.FragmentLibraryBinding
 
-class BucketListFragment : Fragment() {
+class LibraryFragment : Fragment() {
 
-    private lateinit var bucketListViewModel: BucketListViewModel
-    private lateinit var binding: FragmentListBinding
-
+    private lateinit var binding: FragmentLibraryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bucketListViewModel = obtainViewModel(BucketListViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
         return binding.root
     }
 }
