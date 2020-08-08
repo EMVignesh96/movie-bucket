@@ -21,14 +21,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.vignesh.moviebucket.R
+import com.vignesh.moviebucket.databinding.FragmentListBinding
 import com.vignesh.moviebucket.util.obtainViewModel
 
 class BucketListFragment : Fragment() {
 
     private lateinit var bucketListViewModel: BucketListViewModel
+    private lateinit var binding: FragmentListBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +40,7 @@ class BucketListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bucketListViewModel = obtainViewModel(BucketListViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_list, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        bucketListViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
+        return binding.root
     }
 }

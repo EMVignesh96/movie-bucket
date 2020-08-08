@@ -18,12 +18,8 @@ package com.vignesh.moviebucket.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,7 +31,6 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchViewModel: SearchViewModel
     private lateinit var binding: FragmentSearchBinding
-    private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,

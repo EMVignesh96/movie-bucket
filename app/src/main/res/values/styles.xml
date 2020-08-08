@@ -26,7 +26,10 @@
         <item name="android:colorBackground">@color/surfaceColor</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="Widget.MovieBucket.BottomNavigationView.Colored" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="fontFamily">@font/open_sans_bold</item>
     </style>
 
 </resources>
