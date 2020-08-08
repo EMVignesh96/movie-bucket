@@ -35,6 +35,14 @@ class LibraryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_library, container, false)
+
+        binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
+            val topInset = windowInsets.systemWindowInsetTop
+            view.layoutParams.height = topInset
+            view.requestLayout()
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
+
         return binding.root
     }
 }

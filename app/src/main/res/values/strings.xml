@@ -26,4 +26,9 @@
     <string name="title_library">Library</string>
     <string name="bucket_list_is_empty">Your bucket list is empty. Movies you add to your bucket will appear here.</string>
     <string name="no_movies_yet">No movies yet</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_top_rated">Top Rated</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_liked_movies">Liked by You</string>
+    <string name="title_watched">Watched</string>
 </resources>
