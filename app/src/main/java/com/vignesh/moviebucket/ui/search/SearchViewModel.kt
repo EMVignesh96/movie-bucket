@@ -19,20 +19,26 @@ package com.vignesh.moviebucket.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.SearchResult
+import com.vignesh.moviebucket.data.source.MovieRepository
+import kotlinx.coroutines.launch
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
 
-    private val _searchResult = MutableLiveData<List<String>>()
-    val searchResult: LiveData<List<String>>
+    private val _searchResult = MutableLiveData<List<SearchResult>>()
+    val searchResult: LiveData<List<SearchResult>>
         get() = _searchResult
 
 
     fun search(query: String) {
-        val list = mutableListOf<String>()
-        for (i in 0 until 10) {
-            list.add("$query $i")
+        viewModelScope.launch {
+            val result = movieRepo.search(query)
+            if (result is Result.Success) {
+                _searchResult.value = result.data
+            }
         }
-        _searchResult.value = list
     }
 
 }

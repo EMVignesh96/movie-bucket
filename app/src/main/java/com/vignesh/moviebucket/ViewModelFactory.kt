@@ -38,7 +38,7 @@ class ViewModelFactory(
     ) = with(modelClass) {
         when {
             isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
-            isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel()
+            isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(movieRepository)
             isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel(movieRepository)
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

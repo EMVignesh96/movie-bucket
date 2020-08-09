@@ -19,6 +19,7 @@ package com.vignesh.moviebucket.data.source
 import androidx.lifecycle.LiveData
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
+import com.vignesh.moviebucket.data.model.SearchResult
 
 interface MovieRepository {
 
@@ -31,4 +32,6 @@ interface MovieRepository {
     fun observeLikedMovies(): LiveData<Result<List<Movie>>>
 
     fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
+
+    suspend fun search(query: String): Result<List<SearchResult>>
 }

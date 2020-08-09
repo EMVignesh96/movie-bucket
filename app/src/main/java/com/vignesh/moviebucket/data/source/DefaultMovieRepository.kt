@@ -26,6 +26,7 @@ class DefaultMovieRepository(
     private val remoteDataSource: RemoteDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : MovieRepository {
+
     override fun observePopularMovies() = localDataSource.observePopularMovies()
 
     override fun observeTopRatedMovies() = localDataSource.observeTopRatedMovies()
@@ -35,4 +36,6 @@ class DefaultMovieRepository(
     override fun observeLikedMovies() = localDataSource.observeLikedMovies()
 
     override fun observeWatchedMovies() = localDataSource.observeWatchedMovies()
+
+    override suspend fun search(query: String) = remoteDataSource.search(query)
 }

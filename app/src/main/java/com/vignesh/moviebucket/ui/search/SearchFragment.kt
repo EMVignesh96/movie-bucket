@@ -17,6 +17,7 @@
 package com.vignesh.moviebucket.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ import androidx.lifecycle.Observer
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentSearchBinding
 import com.vignesh.moviebucket.util.getViewModelFactory
+
+private val TAG = SearchFragment::class.java.simpleName
 
 class SearchFragment : Fragment() {
 
@@ -41,7 +44,7 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         viewModel.searchResult.observe(viewLifecycleOwner, Observer {
-
+            Log.d(TAG, it.toString())
         })
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->

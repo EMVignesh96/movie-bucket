@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket.data.source.remote
+package com.vignesh.moviebucket.data.model
 
-import com.vignesh.moviebucket.data.Result
-import com.vignesh.moviebucket.data.model.SearchResult
-
-interface RemoteDataSource {
-    suspend fun search(query: String): Result<List<SearchResult>>
-}
+data class SearchResult(
+    val id: String,
+    val title: String,
+    val popularity: String,
+    val releaseYear: String,
+    val rating: String,
+    val posterUrl: String
+)
