@@ -16,23 +16,11 @@
 
 package com.vignesh.moviebucket.data.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "movies")
-data class Movie(
-    @PrimaryKey val id: String,
+data class SearchResult(
+    val id: String,
     val title: String,
-    val releaseDate: String,
-    val runtimeMinutes: Int,
     val popularity: String,
+    val releaseYear: String,
     val rating: String,
-    val genre: String,
-    val overView: String,
-    val cast: String,
-    val posterUrl: String,
-    val inBucket: Boolean = false,
-    val isLiked: Boolean = false,
-    val isWatched: Boolean = false,
-    val libraryItemType: Int = 0
+    val posterUrl: String
 )

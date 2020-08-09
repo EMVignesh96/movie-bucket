@@ -30,7 +30,7 @@ import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentLibraryBinding
 import com.vignesh.moviebucket.util.getViewModelFactory
 
-var TAG: String = LibraryFragment::class.java.simpleName
+private var TAG: String = LibraryFragment::class.java.simpleName
 
 class LibraryFragment : Fragment() {
 

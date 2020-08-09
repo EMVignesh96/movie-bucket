@@ -16,4 +16,9 @@
 
 package com.vignesh.moviebucket.data.source.remote
 
-interface RemoteDataSource
+import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.SearchResult
+
+interface RemoteDataSource {
+    suspend fun search(query: String): Result<List<SearchResult>>
+}

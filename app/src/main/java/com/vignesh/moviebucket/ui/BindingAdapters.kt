@@ -14,25 +14,16 @@
  * limitations under the License.
  */
 
-package com.vignesh.moviebucket.data.model
+package com.vignesh.moviebucket.ui
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 
-@Entity(tableName = "movies")
-data class Movie(
-    @PrimaryKey val id: String,
-    val title: String,
-    val releaseDate: String,
-    val runtimeMinutes: Int,
-    val popularity: String,
-    val rating: String,
-    val genre: String,
-    val overView: String,
-    val cast: String,
-    val posterUrl: String,
-    val inBucket: Boolean = false,
-    val isLiked: Boolean = false,
-    val isWatched: Boolean = false,
-    val libraryItemType: Int = 0
-)
+@BindingAdapter("app:image_url")
+fun setImage(view: ImageView, imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        val url = "https://image.tmdb.org/t/p/w500$imageUrl"
+        Glide.with(view).load(url).centerCrop().into(view)
+    }
+}
