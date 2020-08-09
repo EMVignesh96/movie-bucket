@@ -32,4 +32,6 @@
     <string name="search_for_a_movie">Search for a movie</string>
     <string name="title_search_result">Search Results</string>
     <string name="open">open</string>
+    <string name="could_not_find_that">Couldn\'t find that</string>
+    <string name="try_searching_again_using_a_different_spelling">Try searching again using a different spelling.</string>
 </resources>

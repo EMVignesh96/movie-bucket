@@ -39,6 +39,7 @@ class SearchFragment : Fragment() {
     private val viewModel by viewModels<SearchViewModel> { getViewModelFactory() }
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchResultAdapter: SearchResultAdapter
+    private lateinit var popularAdapter: SearchResultAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,9 +49,20 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         searchResultAdapter = SearchResultAdapter(requireContext())
+        popularAdapter = SearchResultAdapter(requireContext())
 
         viewModel.searchResult.observe(viewLifecycleOwner, Observer { searchResults ->
             searchResultAdapter.setData(searchResults)
+            swapAdapter(searchResultAdapter)
+        })
+
+        viewModel.isQueryEmpty.observe(
+            viewLifecycleOwner,
+            Observer { isQueryEmpty -> if (isQueryEmpty) swapAdapter(popularAdapter) })
+
+        viewModel.popularMovies.observe(viewLifecycleOwner, Observer { movies ->
+            popularAdapter.isSearchResult = false
+            popularAdapter.setData(movies)
         })
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
@@ -82,6 +94,10 @@ class SearchFragment : Fragment() {
         setUpRecyclerView(binding.searchResultRecycler)
 
         return binding.root
+    }
+
+    private fun swapAdapter(adapter: SearchResultAdapter) {
+        binding.searchResultRecycler.adapter = adapter
     }
 
     private fun setUpRecyclerView(searchResultRecycler: RecyclerView) {

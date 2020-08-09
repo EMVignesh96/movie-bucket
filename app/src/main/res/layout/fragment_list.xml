@@ -38,20 +38,18 @@
                 android:id="@+id/no_movies_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_bold"
                 android:text="@string/no_movies_yet"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textAppearance="?textAppearanceHeadline6" />
 
             <TextView
                 android:id="@+id/empty_bucket_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans_semibold"
                 android:text="@string/bucket_list_is_empty"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textAppearance="?textAppearanceBody1" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

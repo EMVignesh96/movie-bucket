@@ -23,9 +23,10 @@ import androidx.room.PrimaryKey
 data class Movie(
     @PrimaryKey val id: String,
     val title: String,
-    val releaseDate: Long,
+    val releaseDate: String,
     val runtimeMinutes: Int,
-    val rating: Float,
+    val popularity: String,
+    val rating: String,
     val genre: String,
     val overView: String,
     val cast: String,

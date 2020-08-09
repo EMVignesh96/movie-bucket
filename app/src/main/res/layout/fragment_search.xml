@@ -44,22 +44,22 @@
 
             <EditText
                 android:id="@+id/search_query"
-                android:imeOptions="actionSearch"
-                android:singleLine="true"
                 style="@style/Widget.MovieBucket.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@null"
-                android:hint="@string/search_for_a_movie" />
+                android:hint="@string/search_for_a_movie"
+                android:imeOptions="actionSearch"
+                android:singleLine="true" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/item_search_result"
             android:id="@+id/search_result_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_search_result" />
 
     </LinearLayout>
 </layout>
