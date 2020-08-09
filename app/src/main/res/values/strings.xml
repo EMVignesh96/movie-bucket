@@ -30,4 +30,6 @@
     <string name="title_liked_movies">Liked by You</string>
     <string name="title_watched">Watched</string>
     <string name="search_for_a_movie">Search for a movie</string>
+    <string name="title_search_result">Search Results</string>
+    <string name="open">open</string>
 </resources>

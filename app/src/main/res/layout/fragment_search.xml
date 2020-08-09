@@ -43,6 +43,9 @@
                 android:tint="@color/primaryTextColor" />
 
             <EditText
+                android:id="@+id/search_query"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
                 style="@style/Widget.MovieBucket.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

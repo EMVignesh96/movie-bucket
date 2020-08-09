@@ -17,7 +17,8 @@
 package com.vignesh.moviebucket.ui.search
 
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentSearchBinding
 import com.vignesh.moviebucket.util.getViewModelFactory
@@ -35,6 +38,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel by viewModels<SearchViewModel> { getViewModelFactory() }
     private lateinit var binding: FragmentSearchBinding
+    private lateinit var searchResultAdapter: SearchResultAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +47,10 @@ class SearchFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        viewModel.searchResult.observe(viewLifecycleOwner, Observer {
-            Log.d(TAG, it.toString())
+        searchResultAdapter = SearchResultAdapter(requireContext())
+
+        viewModel.searchResult.observe(viewLifecycleOwner, Observer { searchResults ->
+            searchResultAdapter.setData(searchResults)
         })
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
@@ -56,6 +62,32 @@ class SearchFragment : Fragment() {
             return@setOnApplyWindowInsetsListener windowInsets
         }
 
+        binding.searchQuery.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(searchText: Editable?) {
+                searchText?.let { query ->
+                    viewModel.search(query.toString())
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+        })
+
+        setUpRecyclerView(binding.searchResultRecycler)
+
         return binding.root
+    }
+
+    private fun setUpRecyclerView(searchResultRecycler: RecyclerView) {
+        searchResultRecycler.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = searchResultAdapter
+        }
     }
 }
