@@ -21,10 +21,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vignesh.moviebucket.databinding.ActivityMainBinding
+import com.vignesh.moviebucket.worker.DownloadLibrariesWorker
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
                     View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         }
+
+        DownloadLibrariesWorker.startWork(baseContext)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

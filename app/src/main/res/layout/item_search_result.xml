@@ -39,7 +39,7 @@
             android:layout_marginStart="16dp"
             android:contentDescription="@{result.title}"
             android:scaleType="centerCrop"
-            app:image_url="@{result.posterUrl}"
+            app:image_path="@{result.posterPath}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

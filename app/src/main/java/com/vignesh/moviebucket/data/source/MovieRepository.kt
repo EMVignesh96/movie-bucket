@@ -34,4 +34,6 @@ interface MovieRepository {
     fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
 
     suspend fun search(query: String): Result<List<SearchResult>>
+
+    suspend fun loadLibraries()
 }

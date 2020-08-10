@@ -15,9 +15,14 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="imagePath"
+            type="String" />
 
         <variable
             name="description"
@@ -32,5 +37,6 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@{description}"
         android:scaleType="centerCrop"
+        app:image_path="@{imagePath}"
         tools:src="@tools:sample/avatars" />
 </layout>

@@ -20,10 +20,12 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
-@BindingAdapter("app:image_url")
-fun setImage(view: ImageView, imageUrl: String?) {
-    if (!imageUrl.isNullOrEmpty()) {
-        val url = "https://image.tmdb.org/t/p/w500$imageUrl"
+private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
+
+@BindingAdapter("app:image_path")
+fun setImage(view: ImageView, imagePath: String?) {
+    if (!imagePath.isNullOrEmpty()) {
+        val url = "$IMAGE_BASE_URL${"w500"}$imagePath"
         Glide.with(view).load(url).centerCrop().into(view)
     }
 }

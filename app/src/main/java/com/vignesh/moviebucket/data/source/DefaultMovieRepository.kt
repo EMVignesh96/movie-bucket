@@ -16,6 +16,7 @@
 
 package com.vignesh.moviebucket.data.source
 
+import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.source.local.LocalDataSource
 import com.vignesh.moviebucket.data.source.remote.RemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -38,4 +39,9 @@ class DefaultMovieRepository(
     override fun observeWatchedMovies() = localDataSource.observeWatchedMovies()
 
     override suspend fun search(query: String) = remoteDataSource.search(query)
+
+    override suspend fun loadLibraries() {
+        val result = remoteDataSource.loadLibraries()
+        if (result is Result.Success) localDataSource.insertMovies(result.data)
+    }
 }

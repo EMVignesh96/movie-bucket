@@ -21,6 +21,7 @@ import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 
 interface LocalDataSource {
+
     fun observePopularMovies(): LiveData<Result<List<Movie>>>
 
     fun observeTopRatedMovies(): LiveData<Result<List<Movie>>>
@@ -30,4 +31,6 @@ interface LocalDataSource {
     fun observeLikedMovies(): LiveData<Result<List<Movie>>>
 
     fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
+
+    suspend fun insertMovies(movies: List<Movie>)
 }

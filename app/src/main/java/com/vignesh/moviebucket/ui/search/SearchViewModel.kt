@@ -48,7 +48,7 @@ class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
                         movie.popularity,
                         releaseYear,
                         movie.rating,
-                        movie.posterUrl
+                        movie.posterPath
                     )
                 )
             }

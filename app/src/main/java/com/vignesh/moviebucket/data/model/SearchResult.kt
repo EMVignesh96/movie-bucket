@@ -22,5 +22,5 @@ data class SearchResult(
     val popularity: String,
     val releaseYear: String,
     val rating: String,
-    val posterUrl: String
+    val posterPath: String
 )

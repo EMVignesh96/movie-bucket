@@ -18,7 +18,10 @@ package com.vignesh.moviebucket.data.source.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.vignesh.moviebucket.data.model.Movie
 
 @Dao
@@ -37,4 +40,13 @@ interface MoviesDao {
 
     @Query("SELECT * FROM movies WHERE isWatched = 1")
     fun observeWatchedMovies(): LiveData<List<Movie>>
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insert(movie: Movie)
+
+    @Query("SELECT * FROM movies WHERE id = :id")
+    suspend fun getMovie(id: String): Movie
+
+    @Update
+    suspend fun update(movie: Movie)
 }
