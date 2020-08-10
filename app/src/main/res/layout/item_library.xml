@@ -37,6 +37,6 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@{description}"
         android:scaleType="centerCrop"
-        app:image_url="@{imagePath}"
+        app:image_path="@{imagePath}"
         tools:src="@tools:sample/avatars" />
 </layout>
