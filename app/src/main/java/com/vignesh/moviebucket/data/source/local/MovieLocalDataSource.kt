@@ -16,6 +16,7 @@
 
 package com.vignesh.moviebucket.data.source.local
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.vignesh.moviebucket.data.Result
@@ -27,6 +28,7 @@ class MovieLocalDataSource(
     private val moviesDao: MoviesDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : LocalDataSource {
+
     override fun observePopularMovies(): LiveData<Result<List<Movie>>> {
         return moviesDao.observePopularMovies().map { Result.Success(it) }
     }
@@ -45,5 +47,24 @@ class MovieLocalDataSource(
 
     override fun observeWatchedMovies(): LiveData<Result<List<Movie>>> {
         return moviesDao.observeWatchedMovies().map { Result.Success(it) }
+    }
+
+    override suspend fun insertMovies(movies: List<Movie>) {
+        movies.forEach { movie ->
+            with(movie) {
+                try {
+                    moviesDao.insert(this)
+                } catch (e: SQLiteConstraintException) {
+                    val movieData = moviesDao.getMovie(id)
+
+                    inBucket = movieData.inBucket
+                    isLiked = movieData.isLiked
+                    isWatched = movieData.isWatched
+                    libraryItemType = movieData.libraryItemType
+
+                    moviesDao.update(this)
+                }
+            }
+        }
     }
 }

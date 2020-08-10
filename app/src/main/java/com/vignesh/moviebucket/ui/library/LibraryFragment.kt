@@ -17,7 +17,6 @@
 package com.vignesh.moviebucket.ui.library
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +35,12 @@ class LibraryFragment : Fragment() {
 
     private lateinit var binding: FragmentLibraryBinding
     private val viewModel by viewModels<LibraryViewModel> { getViewModelFactory() }
+
+    private val popularMoviesAdapter = LibraryMovieAdapter()
+    private val topRatedMoviesAdapter = LibraryMovieAdapter()
+    private val upcomingMoviesAdapter = LibraryMovieAdapter()
+    private val likedMoviesAdapter = LibraryMovieAdapter()
+    private val watchedMoviesAdapter = LibraryMovieAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,23 +67,38 @@ class LibraryFragment : Fragment() {
 
         with(viewModel) {
             popularMovies.observe(viewLifecycleOwner, Observer { popularMovies ->
-                Log.d(TAG, "popularMovies $popularMovies")
+                if (popularMovies.isNotEmpty()) {
+                    binding.popularLayout.visibility = View.VISIBLE
+                    popularMoviesAdapter.setData(popularMovies)
+                }
             })
 
             topRatedMovies.observe(viewLifecycleOwner, Observer { topRatedMovies ->
-                Log.d(TAG, "topRatedMovies $topRatedMovies")
+                if (topRatedMovies.isNotEmpty()) {
+                    binding.topRatedLayout.visibility = View.VISIBLE
+                    topRatedMoviesAdapter.setData(topRatedMovies)
+                }
             })
 
             upcomingMovies.observe(viewLifecycleOwner, Observer { upcomingMovies ->
-                Log.d(TAG, "upcomingMovies $upcomingMovies")
+                if (upcomingMovies.isNotEmpty()) {
+                    binding.upcomingLayout.visibility = View.VISIBLE
+                    upcomingMoviesAdapter.setData(upcomingMovies)
+                }
             })
 
             likedMovies.observe(viewLifecycleOwner, Observer { likedMovies ->
-                Log.d(TAG, "likedMovies $likedMovies")
+                if (likedMovies.isNotEmpty()) {
+                    binding.likedLayout.visibility = View.VISIBLE
+                    likedMoviesAdapter.setData(likedMovies)
+                }
             })
 
             watchedMovies.observe(viewLifecycleOwner, Observer { watchedMovies ->
-                Log.d(TAG, "watchedMovies $watchedMovies")
+                if (watchedMovies.isNotEmpty()) {
+                    binding.watchedLayout.visibility = View.VISIBLE
+                    watchedMoviesAdapter.setData(watchedMovies)
+                }
             })
         }
     }
@@ -91,6 +111,7 @@ class LibraryFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter = popularMoviesAdapter
             }
 
             topRatedMoviesRecycler.apply {
@@ -99,6 +120,7 @@ class LibraryFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter = topRatedMoviesAdapter
             }
 
             upcomingMoviesRecycler.apply {
@@ -107,6 +129,7 @@ class LibraryFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter = upcomingMoviesAdapter
             }
 
             likedMoviesRecycler.apply {
@@ -115,6 +138,7 @@ class LibraryFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter = likedMoviesAdapter
             }
 
             watchedMoviesRecycler.apply {
@@ -123,6 +147,7 @@ class LibraryFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
+                adapter = watchedMoviesAdapter
             }
         }
     }

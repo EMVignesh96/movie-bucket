@@ -19,6 +19,7 @@ package com.vignesh.moviebucket.data.source.remote
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -32,6 +33,27 @@ interface TMDbApiService {
     @GET("search/movie")
     suspend fun search(
         @Query("query") query: String,
+        @Query("api_key") apiKey: String = API_KEY
+    ): String
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(@Query("api_key") apiKey: String = API_KEY): String
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(@Query("api_key") apiKey: String = API_KEY): String
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(@Query("api_key") apiKey: String = API_KEY): String
+
+    @GET("movie/{id}")
+    suspend fun getMovieDetails(
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String = API_KEY
+    ): String
+
+    @GET("movie/{id}/credits")
+    suspend fun getMovieCredits(
+        @Path("id") id: String,
         @Query("api_key") apiKey: String = API_KEY
     ): String
 }

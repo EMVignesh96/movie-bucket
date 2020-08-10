@@ -38,6 +38,7 @@
 
     <style name="TextAppearance.MovieBucket.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
     </style>
 
     <style name="TextAppearance.MovieBucket.Headline6" parent="TextAppearance.MaterialComponents.Headline6">

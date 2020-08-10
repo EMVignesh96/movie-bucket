@@ -28,7 +28,7 @@ import com.vignesh.moviebucket.data.source.MovieRepository
 class LibraryViewModel(private val movieRepo: MovieRepository) : ViewModel() {
 
     val popularMovies =
-        movieRepo.observeLikedMovies().distinctUntilChanged().switchMap { filterMovies(it) }
+        movieRepo.observePopularMovies().distinctUntilChanged().switchMap { filterMovies(it) }
 
     val topRatedMovies =
         movieRepo.observeTopRatedMovies().distinctUntilChanged().switchMap { filterMovies(it) }

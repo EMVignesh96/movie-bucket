@@ -31,8 +31,8 @@ data class Movie(
     val overView: String,
     val cast: String,
     val posterUrl: String,
-    val inBucket: Boolean = false,
-    val isLiked: Boolean = false,
-    val isWatched: Boolean = false,
-    val libraryItemType: Int = 0
+    var inBucket: Boolean = false,
+    var isLiked: Boolean = false,
+    var isWatched: Boolean = false,
+    var libraryItemType: Int = 0
 )

@@ -40,6 +40,7 @@
                 android:textAppearance="?textAppearanceHeadline3" />
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/popular_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +65,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/top_rated_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,6 +90,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/upcoming_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -112,6 +115,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/liked_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,6 +140,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/watched_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
