@@ -55,7 +55,7 @@ class LibraryMovieAdapter : RecyclerView.Adapter<LibraryMovieAdapter.LibraryItem
         fun bind(movie: Movie) {
             with(binding) {
                 description = movie.title
-                imagePath = movie.posterUrl
+                imagePath = movie.posterPath
                 executePendingBindings()
             }
         }

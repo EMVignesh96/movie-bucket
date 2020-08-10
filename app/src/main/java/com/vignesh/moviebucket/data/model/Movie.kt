@@ -30,7 +30,7 @@ data class Movie(
     val genre: String,
     val overView: String,
     val cast: String,
-    val posterUrl: String,
+    val posterPath: String,
     var inBucket: Boolean = false,
     var isLiked: Boolean = false,
     var isWatched: Boolean = false,
