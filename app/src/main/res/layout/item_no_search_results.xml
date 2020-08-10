@@ -36,7 +36,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/try_searching_again_using_a_different_spelling"
             android:textAlignment="center"
-            android:textAppearance="?textAppearanceBody1" />
+            android:textAppearance="?textAppearanceBody2" />
 
     </LinearLayout>
 </layout>

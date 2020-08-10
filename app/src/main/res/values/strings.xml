@@ -34,4 +34,11 @@
     <string name="open">open</string>
     <string name="could_not_find_that">Couldn\'t find that</string>
     <string name="try_searching_again_using_a_different_spelling">Try searching again using a different spelling.</string>
+    <string name="action_bucket">Bucket</string>
+    <string name="action_like">Like</string>
+    <string name="action_liked">Liked</string>
+    <string name="action_share">Share</string>
+    <string name="action_watch">Watch</string>
+    <string name="action_watched">Watched</string>
+    <string name="powered_by">Powered by</string>
 </resources>
