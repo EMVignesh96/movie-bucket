@@ -50,21 +50,31 @@ class MovieLocalDataSource(
     }
 
     override suspend fun insertMovies(movies: List<Movie>) {
-        movies.forEach { movie ->
-            with(movie) {
-                try {
-                    moviesDao.insert(this)
-                } catch (e: SQLiteConstraintException) {
-                    val movieData = moviesDao.getMovie(id)
+        movies.forEach { movie -> insertMovie(movie) }
+    }
 
-                    inBucket = movieData.inBucket
-                    isLiked = movieData.isLiked
-                    isWatched = movieData.isWatched
-                    libraryItemType = movieData.libraryItemType
+    override suspend fun insertMovie(movie: Movie) {
+        with(movie) {
+            try {
+                moviesDao.insert(this)
+            } catch (e: SQLiteConstraintException) {
+                val movieData = moviesDao.getMovie(id)
 
-                    moviesDao.update(this)
-                }
+                inBucket = movieData.inBucket
+                isLiked = movieData.isLiked
+                isWatched = movieData.isWatched
+                libraryItemType = movieData.libraryItemType
+
+                moviesDao.update(this)
             }
+        }
+    }
+
+    override suspend fun getMovie(id: String): Result<Movie?> {
+        return try {
+            Result.Success(moviesDao.getMovie(id))
+        } catch (e: Exception) {
+            Result.Error(e)
         }
     }
 }

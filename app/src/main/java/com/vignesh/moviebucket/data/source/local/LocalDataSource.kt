@@ -33,4 +33,8 @@ interface LocalDataSource {
     fun observeWatchedMovies(): LiveData<Result<List<Movie>>>
 
     suspend fun insertMovies(movies: List<Movie>)
+
+    suspend fun insertMovie(movie: Movie)
+
+    suspend fun getMovie(id: String): Result<Movie?>
 }

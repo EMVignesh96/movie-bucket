@@ -36,4 +36,6 @@ interface MovieRepository {
     suspend fun search(query: String): Result<List<SearchResult>>
 
     suspend fun loadLibraries()
+
+    suspend fun getMovieDetails(id: String): Result<Movie?>
 }
