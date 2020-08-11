@@ -40,6 +40,10 @@
     <string name="action_share">Share</string>
     <string name="action_watch">Watch</string>
     <string name="action_watched">Watched</string>
-    <string name="powered_by">Powered by</string>
+    <string name="source">Source</string>
     <string name="title_details">Movie Details</string>
+    <string name="something_went_wrong_when_trying_to_connect">Something went wrong when trying to connect.</string>
+    <string name="abbr_hours">h</string>
+    <string name="abbr_minutes">m</string>
+    <string name="tmdb">TMDb</string>
 </resources>

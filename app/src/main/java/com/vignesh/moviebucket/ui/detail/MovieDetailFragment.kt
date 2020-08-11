@@ -17,7 +17,6 @@
 package com.vignesh.moviebucket.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,18 +44,28 @@ class MovieDetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         val args: MovieDetailFragmentArgs by navArgs()
 
+        binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
+            val topInset = windowInsets.systemWindowInsetTop
+            view.layoutParams.height = topInset
+            view.requestLayout()
+            return@setOnApplyWindowInsetsListener windowInsets
+        }
+
         viewModel.start(args.movieId)
 
         viewModel.dataLoading.observe(viewLifecycleOwner, Observer { dataLoading ->
-            Log.d(TAG, "dataLoading $dataLoading")
+            binding.loadingIndicator.visibility = if (dataLoading) View.VISIBLE else View.INVISIBLE
         })
 
         viewModel.loadingFailed.observe(viewLifecycleOwner, Observer { loadingFailed ->
-            Log.d(TAG, "loadingFailed $loadingFailed")
+            binding.errorContainer.visibility = if (loadingFailed) View.VISIBLE else View.INVISIBLE
         })
 
         viewModel.movie.observe(viewLifecycleOwner, Observer { movie ->
-            Log.d(TAG, "movie $movie")
+            binding.movie = movie
+            binding.runtime.text =
+                viewModel.getRuntimeDisplayString(requireContext(), movie.runtimeMinutes)
+            binding.detailsContainer.visibility = View.VISIBLE
         })
 
         return binding.root

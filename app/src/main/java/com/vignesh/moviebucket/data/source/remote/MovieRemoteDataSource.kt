@@ -176,6 +176,7 @@ object MovieRemoteDataSource : RemoteDataSource {
         return StringBuilder().apply {
             for (i in 0 until genreArray.length()) {
                 append(genreArray.getJSONObject(i).getString(GENRE_NAME))
+                if (i != genreArray.length() - 1) append(" | ")
             }
         }.toString()
     }

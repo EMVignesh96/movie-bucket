@@ -16,10 +16,12 @@
 
 package com.vignesh.moviebucket.ui.detail
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.source.MovieRepository
@@ -46,6 +48,13 @@ class MovieDetailViewModel(private val movieRepo: MovieRepository) : ViewModel()
                 _loadingFailed.value = true
             }
         }
+    }
+
+    fun getRuntimeDisplayString(context: Context, runtimeMinutes: Int): String {
+        val hours = runtimeMinutes / 60
+        val min = runtimeMinutes % 60
+        val resource = context.resources
+        return "$hours${resource.getString(R.string.abbr_hours)} $min${resource.getString(R.string.abbr_minutes)}"
     }
 
     private val _dataLoading = MutableLiveData<Boolean>()
