@@ -17,6 +17,7 @@
 package com.vignesh.moviebucket.data.source
 
 import com.vignesh.moviebucket.data.Result
+import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.source.local.LocalDataSource
 import com.vignesh.moviebucket.data.source.remote.RemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -43,5 +44,20 @@ class DefaultMovieRepository(
     override suspend fun loadLibraries() {
         val result = remoteDataSource.loadLibraries()
         if (result is Result.Success) localDataSource.insertMovies(result.data)
+    }
+
+    override suspend fun getMovieDetails(id: String): Result<Movie?> {
+        val localResult = localDataSource.getMovie(id)
+        if (localResult is Result.Success && localResult.data != null) {
+            return localResult
+        }
+
+        val remoteResult = remoteDataSource.getMovieDetails(id)
+        return if (remoteResult is Result.Success) {
+            localDataSource.insertMovie(remoteResult.data)
+            remoteResult
+        } else {
+            remoteResult
+        }
     }
 }

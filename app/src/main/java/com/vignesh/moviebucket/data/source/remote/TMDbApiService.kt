@@ -23,7 +23,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
-private const val API_KEY = "<api-key>"
+private const val API_KEY = "d551e05f30303d59c88b1157b41f4c09"
 
 private val retrofit =
     Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(ScalarsConverterFactory.create())

@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.vignesh.moviebucket.data.source.MovieRepository
 import com.vignesh.moviebucket.ui.bucketlist.BucketListViewModel
+import com.vignesh.moviebucket.ui.detail.MovieDetailViewModel
 import com.vignesh.moviebucket.ui.library.LibraryViewModel
 import com.vignesh.moviebucket.ui.search.SearchViewModel
 
@@ -40,6 +41,9 @@ class ViewModelFactory(
             isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
             isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(movieRepository)
             isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel(movieRepository)
+            isAssignableFrom(MovieDetailViewModel::class.java) -> MovieDetailViewModel(
+                movieRepository
+            )
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     } as T

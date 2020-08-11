@@ -34,4 +34,16 @@
     <string name="open">open</string>
     <string name="could_not_find_that">Couldn\'t find that</string>
     <string name="try_searching_again_using_a_different_spelling">Try searching again using a different spelling.</string>
+    <string name="action_bucket">Bucket</string>
+    <string name="action_like">Like</string>
+    <string name="action_liked">Liked</string>
+    <string name="action_share">Share</string>
+    <string name="action_watch">Watch</string>
+    <string name="action_watched">Watched</string>
+    <string name="source">Source</string>
+    <string name="title_details">Movie Details</string>
+    <string name="something_went_wrong_when_trying_to_connect">Something went wrong when trying to connect.</string>
+    <string name="abbr_hours">h</string>
+    <string name="abbr_minutes">m</string>
+    <string name="tmdb">TMDb</string>
 </resources>

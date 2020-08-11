@@ -39,6 +39,7 @@ object MovieRemoteDataSource : RemoteDataSource {
     private const val RUNTIME = "runtime"
     private const val OVERVIEW = "overview"
 
+    private const val LIB_TYPE_NONE = 1
     private const val LIB_TYPE_POPULAR = 1
     private const val LIB_TYPE_TOP_RATED = 2
     private const val LIB_TYPE_UPCOMING = 3
@@ -66,6 +67,11 @@ object MovieRemoteDataSource : RemoteDataSource {
             addAll(getUpcomingMovies())
         }
         return Result.Success(lib)
+    }
+
+    override suspend fun getMovieDetails(id: String): Result<Movie> {
+        val movie = getMovieDetails(id, LIB_TYPE_NONE)
+        return Result.Success(movie)
     }
 
     private suspend fun getUpcomingMovies(): List<Movie> {
@@ -109,13 +115,18 @@ object MovieRemoteDataSource : RemoteDataSource {
         for (i in 0 until results.length()) {
             try {
                 val id = results.getJSONObject(i).getString(MOVIE_ID)
-                val details = JSONObject(TMDbApi.retrofitService.getMovieDetails(id))
-                val credits = JSONObject(TMDbApi.retrofitService.getMovieCredits(id))
-                popularMovies.add(parseMovie(id, details, credits, type))
+                val movie = getMovieDetails(id, type)
+                popularMovies.add(movie)
             } catch (e: Exception) {
             }
         }
         return popularMovies
+    }
+
+    private suspend fun getMovieDetails(id: String, type: Int = LIB_TYPE_NONE): Movie {
+        val details = JSONObject(TMDbApi.retrofitService.getMovieDetails(id))
+        val credits = JSONObject(TMDbApi.retrofitService.getMovieCredits(id))
+        return parseMovie(id, details, credits, type)
     }
 
     private fun parseMovie(id: String, details: JSONObject, credits: JSONObject, type: Int): Movie {
@@ -165,6 +176,7 @@ object MovieRemoteDataSource : RemoteDataSource {
         return StringBuilder().apply {
             for (i in 0 until genreArray.length()) {
                 append(genreArray.getJSONObject(i).getString(GENRE_NAME))
+                if (i != genreArray.length() - 1) append(" | ")
             }
         }.toString()
     }

@@ -49,7 +49,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/bucket_list_is_empty"
                 android:textAlignment="center"
-                android:textAppearance="?textAppearanceBody1" />
+                android:textAppearance="?textAppearanceBody2" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
