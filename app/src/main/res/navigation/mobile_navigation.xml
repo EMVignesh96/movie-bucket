@@ -36,5 +36,18 @@
         android:id="@+id/navigation_library"
         android:name="com.vignesh.moviebucket.ui.library.LibraryFragment"
         android:label="@string/title_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_navigation_library_to_movieDetailFragment"
+            app:destination="@id/movie_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movie_detail_fragment"
+        android:name="com.vignesh.moviebucket.ui.detail.MovieDetailFragment"
+        android:label="@string/title_details"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="movieId"
+            app:argType="string" />
+    </fragment>
 </navigation>

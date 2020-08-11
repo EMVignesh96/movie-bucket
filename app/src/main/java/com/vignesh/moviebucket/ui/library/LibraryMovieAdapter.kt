@@ -27,6 +27,11 @@ import com.vignesh.moviebucket.databinding.ItemLibraryBinding
 class LibraryMovieAdapter : RecyclerView.Adapter<LibraryMovieAdapter.LibraryItemHolder>() {
 
     private val movies = mutableListOf<Movie>()
+    private var onItemClicked: ((String) -> Unit)? = null
+
+    fun setOnItemClickListener(l: ((String) -> Unit)) {
+        onItemClicked = l
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryItemHolder {
         val binding: ItemLibraryBinding = DataBindingUtil.inflate(
@@ -56,6 +61,7 @@ class LibraryMovieAdapter : RecyclerView.Adapter<LibraryMovieAdapter.LibraryItem
             with(binding) {
                 description = movie.title
                 imagePath = movie.posterPath
+                root.setOnClickListener { _ -> onItemClicked?.let { it(movies[adapterPosition].id) } }
                 executePendingBindings()
             }
         }

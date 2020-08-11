@@ -41,4 +41,5 @@
     <string name="action_watch">Watch</string>
     <string name="action_watched">Watched</string>
     <string name="powered_by">Powered by</string>
+    <string name="title_details">Movie Details</string>
 </resources>

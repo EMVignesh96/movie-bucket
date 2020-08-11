@@ -21,6 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.switchMap
+import com.vignesh.moviebucket.Event
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.source.MovieRepository
@@ -52,6 +53,14 @@ class LibraryViewModel(private val movieRepo: MovieRepository) : ViewModel() {
         }
 
         return result
+    }
+
+    private val _movieClicked = MutableLiveData<Event<String>>()
+    val movieClicked: LiveData<Event<String>>
+        get() = _movieClicked
+
+    fun onMovieClicked(movieId: String) {
+        _movieClicked.value = Event(movieId)
     }
 
 }
