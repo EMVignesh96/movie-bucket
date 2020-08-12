@@ -37,4 +37,18 @@ interface LocalDataSource {
     suspend fun insertMovie(movie: Movie)
 
     suspend fun getMovie(id: String): Result<Movie?>
+
+    suspend fun removeFromBucket(movieId: String)
+
+    suspend fun addToBucket(movieId: String)
+
+    suspend fun unlikeMovie(movieId: String)
+
+    suspend fun likeMovie(movieId: String)
+
+    suspend fun unwatchMovie(movieId: String)
+
+    suspend fun markAsWatched(movieId: String)
+
+    fun observeMovie(movieId: String): LiveData<Result<Movie?>>
 }
