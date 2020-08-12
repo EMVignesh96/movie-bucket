@@ -20,6 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -62,10 +63,61 @@ class MovieDetailFragment : Fragment() {
         })
 
         viewModel.movie.observe(viewLifecycleOwner, Observer { movie ->
-            binding.movie = movie
-            binding.runtime.text =
-                viewModel.getRuntimeDisplayString(requireContext(), movie.runtimeMinutes)
-            binding.detailsContainer.visibility = View.VISIBLE
+            if (movie == null) return@Observer
+            with(binding) {
+                binding.movie = movie
+                runtime.text =
+                    viewModel.getRuntimeDisplayString(requireContext(), movie.runtimeMinutes)
+
+                bucketToggle.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        if (movie.inBucket) R.drawable.ic_baseline_done_24 else R.drawable.ic_baseline_add_24
+                    ),
+                    null,
+                    null
+                )
+                bucketToggle.setOnClickListener {
+                    if (movie.inBucket) viewModel.removeFromBucket(movie.id)
+                    else viewModel.addToBucket(movie.id)
+                }
+
+                binding.likeToggle.text =
+                    if (movie.isLiked) requireContext().getString(R.string.action_liked) else requireContext().getString(
+                        R.string.action_like
+                    )
+                likeToggle.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        if (movie.isLiked) R.drawable.ic_baseline_thumb_up_24 else R.drawable.ic_outline_thumb_up_24
+                    ),
+                    null,
+                    null
+                )
+                likeToggle.setOnClickListener {
+                    if (movie.isLiked) viewModel.unlikeMovie(movie.id)
+                    else viewModel.likeMovie(movie.id)
+                }
+
+                binding.watchToggle.text =
+                    if (movie.isWatched) requireContext().getString(R.string.action_watched) else requireContext().getString(
+                        R.string.action_watch
+                    )
+                watchToggle.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    requireContext().getDrawable(if (movie.isWatched) R.drawable.ic_baseline_movie_24 else R.drawable.ic_outline_movie_24),
+                    null,
+                    null
+                )
+                watchToggle.setOnClickListener {
+                    if (movie.isWatched) viewModel.unwatchMovie(movie.id)
+                    else viewModel.markAsWatched(movie.id)
+                }
+
+                detailsContainer.visibility = View.VISIBLE
+            }
         })
 
         return binding.root

@@ -60,4 +60,19 @@ class DefaultMovieRepository(
             remoteResult
         }
     }
+
+    override suspend fun removeFromBucket(movieId: String) =
+        localDataSource.removeFromBucket(movieId)
+
+    override suspend fun addToBucket(movieId: String) = localDataSource.addToBucket(movieId)
+
+    override suspend fun unlikeMovie(movieId: String) = localDataSource.unlikeMovie(movieId)
+
+    override suspend fun likeMovie(movieId: String) = localDataSource.likeMovie(movieId)
+
+    override suspend fun unwatchMovie(movieId: String) = localDataSource.unwatchMovie(movieId)
+
+    override suspend fun markAsWatched(movieId: String) = localDataSource.markAsWatched(movieId)
+
+    override fun observeMovie(id: String) = localDataSource.observeMovie(id)
 }

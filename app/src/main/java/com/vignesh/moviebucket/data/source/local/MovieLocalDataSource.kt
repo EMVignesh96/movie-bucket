@@ -77,4 +77,19 @@ class MovieLocalDataSource(
             Result.Error(e)
         }
     }
+
+    override suspend fun removeFromBucket(movieId: String) = moviesDao.removeFromBucket(movieId)
+
+    override suspend fun addToBucket(movieId: String) = moviesDao.addToBucket(movieId)
+
+    override suspend fun unlikeMovie(movieId: String) = moviesDao.unlikeMovie(movieId)
+
+    override suspend fun likeMovie(movieId: String) = moviesDao.likeMovie(movieId)
+
+    override suspend fun unwatchMovie(movieId: String) = moviesDao.unwatchMovie(movieId)
+
+    override suspend fun markAsWatched(movieId: String) = moviesDao.markAsWatched(movieId)
+
+    override fun observeMovie(movieId: String): LiveData<Result<Movie?>> =
+        moviesDao.observeMovies(movieId).map { movie -> Result.Success(movie) }
 }

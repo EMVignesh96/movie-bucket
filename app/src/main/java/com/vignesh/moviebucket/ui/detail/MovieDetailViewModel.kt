@@ -20,6 +20,8 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.data.Result
@@ -29,22 +31,20 @@ import kotlinx.coroutines.launch
 
 class MovieDetailViewModel(private val movieRepo: MovieRepository) : ViewModel() {
 
-    private var id = ""
+    private var _movieId = MutableLiveData<String>()
 
     fun start(movieId: String) {
-        if (_dataLoading.value == true || id == movieId) return
+        if (_dataLoading.value == true || _movieId.value == movieId) return
         _dataLoading.value = true
-        id = movieId
-        getMovieDetails(id)
+        loadMovieDetails(movieId)
+        _movieId.value = movieId
     }
 
-    private fun getMovieDetails(movieId: String) {
+    private fun loadMovieDetails(movieId: String) {
         viewModelScope.launch {
             val result = movieRepo.getMovieDetails(movieId)
             _dataLoading.value = false
-            if (result is Result.Success && result.data != null) {
-                _movie.value = result.data
-            } else {
+            if ((result is Result.Success && result.data == null) || result is Result.Error) {
                 _loadingFailed.value = true
             }
         }
@@ -57,6 +57,42 @@ class MovieDetailViewModel(private val movieRepo: MovieRepository) : ViewModel()
         return "$hours${resource.getString(R.string.abbr_hours)} $min${resource.getString(R.string.abbr_minutes)}"
     }
 
+    fun removeFromBucket(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.removeFromBucket(movieId)
+        }
+    }
+
+    fun addToBucket(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.addToBucket(movieId)
+        }
+    }
+
+    fun unlikeMovie(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.unlikeMovie(movieId)
+        }
+    }
+
+    fun likeMovie(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.likeMovie(movieId)
+        }
+    }
+
+    fun unwatchMovie(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.unwatchMovie(movieId)
+        }
+    }
+
+    fun markAsWatched(movieId: String) {
+        viewModelScope.launch {
+            movieRepo.markAsWatched(movieId)
+        }
+    }
+
     private val _dataLoading = MutableLiveData<Boolean>()
     val dataLoading: LiveData<Boolean>
         get() = _dataLoading
@@ -65,7 +101,12 @@ class MovieDetailViewModel(private val movieRepo: MovieRepository) : ViewModel()
     val loadingFailed: LiveData<Boolean>
         get() = _loadingFailed
 
-    private val _movie = MutableLiveData<Movie>()
-    val movie: LiveData<Movie>
+    private val _movie = _movieId.switchMap { id ->
+        movieRepo.observeMovie(id).map { result ->
+            if (result is Result.Success) result.data
+            else null
+        }
+    }
+    val movie: LiveData<Movie?>
         get() = _movie
 }
