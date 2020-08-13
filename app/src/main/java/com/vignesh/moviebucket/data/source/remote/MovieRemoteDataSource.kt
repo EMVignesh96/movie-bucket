@@ -20,6 +20,7 @@ import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.model.SearchResult
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import kotlin.math.min
 
@@ -70,8 +71,12 @@ object MovieRemoteDataSource : RemoteDataSource {
     }
 
     override suspend fun getMovieDetails(id: String): Result<Movie> {
-        val movie = getMovieDetails(id, LIB_TYPE_NONE)
-        return Result.Success(movie)
+        return try {
+            val movie = getMovieDetails(id, LIB_TYPE_NONE)
+            Result.Success(movie)
+        } catch (e: Exception) {
+            Result.Error(e)
+        }
     }
 
     private suspend fun getUpcomingMovies(): List<Movie> {
@@ -123,12 +128,14 @@ object MovieRemoteDataSource : RemoteDataSource {
         return popularMovies
     }
 
+    @Throws(Exception::class)
     private suspend fun getMovieDetails(id: String, type: Int = LIB_TYPE_NONE): Movie {
         val details = JSONObject(TMDbApi.retrofitService.getMovieDetails(id))
         val credits = JSONObject(TMDbApi.retrofitService.getMovieCredits(id))
         return parseMovie(id, details, credits, type)
     }
 
+    @Throws(JSONException::class)
     private fun parseMovie(id: String, details: JSONObject, credits: JSONObject, type: Int): Movie {
         val genres = getGenres(details.getJSONArray(GENRES))
         val cast = getCast(credits)

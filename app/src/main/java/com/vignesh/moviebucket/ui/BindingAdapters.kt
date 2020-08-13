@@ -19,6 +19,7 @@ package com.vignesh.moviebucket.ui
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 
@@ -26,6 +27,6 @@ private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 fun setImage(view: ImageView, imagePath: String?) {
     if (!imagePath.isNullOrEmpty()) {
         val url = "$IMAGE_BASE_URL${"w500"}$imagePath"
-        Glide.with(view).load(url).centerCrop().into(view)
+        Glide.with(view).load(url).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(view)
     }
 }

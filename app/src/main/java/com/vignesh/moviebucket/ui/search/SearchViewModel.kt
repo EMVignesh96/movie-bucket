@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import com.vignesh.moviebucket.Event
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.model.SearchResult
@@ -77,6 +78,14 @@ class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
             _isQueryEmpty.value = true
         }
     }
+
+    fun onMovieClicked(movieId: String) {
+        _movieClicked.value = Event(movieId)
+    }
+
+    private val _movieClicked = MutableLiveData<Event<String>>()
+    val movieClicked: LiveData<Event<String>>
+        get() = _movieClicked
 
     private val _isQueryEmpty = MutableLiveData<Boolean>(true)
     val isQueryEmpty: LiveData<Boolean>

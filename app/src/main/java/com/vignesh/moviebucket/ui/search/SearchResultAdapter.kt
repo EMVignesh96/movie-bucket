@@ -39,6 +39,13 @@ class SearchResultAdapter(private val context: Context) :
     private val searchResults = mutableListOf<SearchResult>()
     var isSearchResult = true
 
+
+    private var onItemSelected: ((String) -> Unit)? = null
+
+    fun setOnItemSelectedListener(l: ((String) -> Unit)) {
+        onItemSelected = l
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_NO_RESULTS -> {
@@ -115,11 +122,18 @@ class SearchResultAdapter(private val context: Context) :
         }
     }
 
-    class SearchResultViewHolder(private val binding: ItemSearchResultBinding) :
+    inner class SearchResultViewHolder(private val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(result: SearchResult) {
             with(binding) {
                 this.result = result
+                binding.root.setOnClickListener {
+                    onItemSelected?.let { itemSelected ->
+                        itemSelected(
+                            searchResults[adapterPosition - 1].id
+                        )
+                    }
+                }
                 executePendingBindings()
             }
         }
