@@ -75,4 +75,6 @@ class DefaultMovieRepository(
     override suspend fun markAsWatched(movieId: String) = localDataSource.markAsWatched(movieId)
 
     override fun observeMovie(id: String) = localDataSource.observeMovie(id)
+
+    override fun observeBucketList() = localDataSource.observeBucketList()
 }

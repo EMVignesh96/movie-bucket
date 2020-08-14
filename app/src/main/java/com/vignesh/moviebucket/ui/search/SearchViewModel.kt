@@ -27,6 +27,7 @@ import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.model.SearchResult
 import com.vignesh.moviebucket.data.source.MovieRepository
+import com.vignesh.moviebucket.ui.getReleaseYear
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
@@ -40,14 +41,12 @@ class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
         if (movieResult is Result.Success) {
             val list = mutableListOf<SearchResult>()
             movieResult.data.forEach { movie ->
-                val parts = movie.releaseDate.split("-")
-                val releaseYear = if (parts.size == 3) parts[0] else ""
                 list.add(
                     SearchResult(
                         movie.id,
                         movie.title,
                         movie.popularity,
-                        releaseYear,
+                        getReleaseYear(movie.releaseDate),
                         movie.rating,
                         movie.posterPath
                     )

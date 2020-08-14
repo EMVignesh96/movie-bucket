@@ -29,6 +29,7 @@ import androidx.navigation.fragment.navArgs
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.databinding.FragmentDetailBinding
+import com.vignesh.moviebucket.ui.getRuntimeDisplayString
 import com.vignesh.moviebucket.util.getViewModelFactory
 
 private var TAG = MovieDetailFragment::class.java.simpleName
@@ -74,8 +75,7 @@ class MovieDetailFragment : Fragment() {
     private fun setMovieData(movie: Movie) {
         with(binding) {
             binding.movie = movie
-            runtime.text =
-                viewModel.getRuntimeDisplayString(requireContext(), movie.runtimeMinutes)
+            runtime.text = getRuntimeDisplayString(requireContext(), movie.runtimeMinutes)
 
             bucketToggle.setCompoundDrawablesWithIntrinsicBounds(
                 null,

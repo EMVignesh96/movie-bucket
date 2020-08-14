@@ -23,14 +23,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentListBinding
 import com.vignesh.moviebucket.util.getViewModelFactory
+
+private var TAG = BucketListFragment::class.java.simpleName
 
 class BucketListFragment : Fragment() {
 
     private val viewModel by viewModels<BucketListViewModel> { getViewModelFactory() }
     private lateinit var binding: FragmentListBinding
+    private val bucketListAdapter = BucketListAdapter()
 
 
     override fun onCreateView(
@@ -39,6 +44,20 @@ class BucketListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
+
+        setUpRecyclerView()
+
+        viewModel.bucketList.observe(viewLifecycleOwner, Observer { bucketList ->
+            bucketListAdapter.setData(bucketList)
+        })
+
         return binding.root
+    }
+
+    private fun setUpRecyclerView() {
+        binding.bucketListRecycler.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = bucketListAdapter
+        }
     }
 }

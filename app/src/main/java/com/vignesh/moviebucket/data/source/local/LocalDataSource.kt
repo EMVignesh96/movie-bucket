@@ -51,4 +51,6 @@ interface LocalDataSource {
     suspend fun markAsWatched(movieId: String)
 
     fun observeMovie(movieId: String): LiveData<Result<Movie?>>
+
+    fun observeBucketList(): LiveData<Result<List<Movie>>>
 }

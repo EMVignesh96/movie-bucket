@@ -38,7 +38,7 @@ class ViewModelFactory(
         handle: SavedStateHandle
     ) = with(modelClass) {
         when {
-            isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel()
+            isAssignableFrom(BucketListViewModel::class.java) -> BucketListViewModel(movieRepository)
             isAssignableFrom(SearchViewModel::class.java) -> SearchViewModel(movieRepository)
             isAssignableFrom(LibraryViewModel::class.java) -> LibraryViewModel(movieRepository)
             isAssignableFrom(MovieDetailViewModel::class.java) -> MovieDetailViewModel(
