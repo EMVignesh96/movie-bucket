@@ -1,0 +1,31 @@
+<!--
+  ~ Copyright 2020 V App Factory
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+  <group
+      android:scaleX="0.33540374"
+      android:scaleY="0.33540374"
+      android:translateX="27"
+      android:translateY="27">
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M33.671,67.308L127.003,66.835L127.138,93.501L33.806,93.974L33.671,67.308ZM20.135,27.376L20.203,40.709L33.536,40.641L33.603,53.975L20.27,54.042L20.541,107.375L33.874,107.307L33.941,120.64L20.608,120.708L20.676,134.041L140.674,133.433L140.607,120.1L127.273,120.167L127.206,106.834L140.539,106.767L140.269,53.434L126.936,53.501L126.868,40.168L140.201,40.101L140.134,26.768L20.135,27.376ZM60.27,53.839L46.937,53.907L46.869,40.574L60.202,40.506L60.27,53.839ZM60.608,120.505L47.275,120.573L47.207,107.24L60.54,107.172L60.608,120.505ZM86.936,53.704L73.603,53.772L73.535,40.439L86.868,40.371L86.936,53.704ZM87.274,120.37L73.941,120.438L73.873,107.104L87.206,107.037L87.274,120.37ZM113.602,53.569L100.269,53.637L100.202,40.304L113.535,40.236L113.602,53.569ZM113.94,120.235L100.607,120.302L100.54,106.969L113.873,106.902L113.94,120.235Z" />
+  </group>
+</vector>
