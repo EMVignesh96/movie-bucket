@@ -22,10 +22,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import com.vignesh.moviebucket.Event
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.model.SearchResult
 import com.vignesh.moviebucket.data.source.MovieRepository
+import com.vignesh.moviebucket.ui.getReleaseYear
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
@@ -39,14 +41,12 @@ class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
         if (movieResult is Result.Success) {
             val list = mutableListOf<SearchResult>()
             movieResult.data.forEach { movie ->
-                val parts = movie.releaseDate.split("-")
-                val releaseYear = if (parts.size == 3) parts[0] else ""
                 list.add(
                     SearchResult(
                         movie.id,
                         movie.title,
                         movie.popularity,
-                        releaseYear,
+                        getReleaseYear(movie.releaseDate),
                         movie.rating,
                         movie.posterPath
                     )
@@ -77,6 +77,14 @@ class SearchViewModel(private val movieRepo: MovieRepository) : ViewModel() {
             _isQueryEmpty.value = true
         }
     }
+
+    fun onMovieClicked(movieId: String) {
+        _movieClicked.value = Event(movieId)
+    }
+
+    private val _movieClicked = MutableLiveData<Event<String>>()
+    val movieClicked: LiveData<Event<String>>
+        get() = _movieClicked
 
     private val _isQueryEmpty = MutableLiveData<Boolean>(true)
     val isQueryEmpty: LiveData<Boolean>

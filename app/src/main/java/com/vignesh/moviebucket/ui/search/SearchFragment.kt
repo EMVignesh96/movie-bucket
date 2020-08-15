@@ -26,8 +26,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.vignesh.moviebucket.EventObserver
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentSearchBinding
 import com.vignesh.moviebucket.util.getViewModelFactory
@@ -49,11 +51,20 @@ class SearchFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
         searchResultAdapter = SearchResultAdapter(requireContext())
+        searchResultAdapter.setOnItemSelectedListener { id -> viewModel.onMovieClicked(id) }
+
         popularAdapter = SearchResultAdapter(requireContext())
+        popularAdapter.setOnItemSelectedListener { id -> viewModel.onMovieClicked(id) }
 
         viewModel.searchResult.observe(viewLifecycleOwner, Observer { searchResults ->
             searchResultAdapter.setData(searchResults)
             swapAdapter(searchResultAdapter)
+        })
+
+        viewModel.movieClicked.observe(viewLifecycleOwner, EventObserver { movieId ->
+            val action =
+                SearchFragmentDirections.actionNavigationSearchToMovieDetailFragment(movieId)
+            findNavController().navigate(action)
         })
 
         viewModel.isQueryEmpty.observe(

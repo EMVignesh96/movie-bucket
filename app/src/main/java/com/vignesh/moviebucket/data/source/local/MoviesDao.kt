@@ -70,4 +70,7 @@ interface MoviesDao {
 
     @Query("SELECT * FROM movies WHERE id = :movieId")
     fun observeMovies(movieId: String): LiveData<Movie?>
+
+    @Query("SELECT * FROM movies WHERE inBucket = 1")
+    fun observeBucketList(): LiveData<List<Movie>>
 }

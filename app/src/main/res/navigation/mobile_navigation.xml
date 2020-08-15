@@ -24,13 +24,21 @@
         android:id="@+id/navigation_list"
         android:name="com.vignesh.moviebucket.ui.bucketlist.BucketListFragment"
         android:label="@string/title_bucket_list"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_navigation_list_to_movie_detail_fragment"
+            app:destination="@id/movie_detail_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.vignesh.moviebucket.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigation_search_to_movie_detail_fragment"
+            app:destination="@id/movie_detail_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_library"

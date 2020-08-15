@@ -92,4 +92,8 @@ class MovieLocalDataSource(
 
     override fun observeMovie(movieId: String): LiveData<Result<Movie?>> =
         moviesDao.observeMovies(movieId).map { movie -> Result.Success(movie) }
+
+    override fun observeBucketList(): LiveData<Result<List<Movie>>> {
+        return moviesDao.observeBucketList().map { Result.Success(it) }
+    }
 }

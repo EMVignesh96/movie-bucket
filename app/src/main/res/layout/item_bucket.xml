@@ -21,8 +21,20 @@
     <data>
 
         <variable
-            name="result"
-            type="com.vignesh.moviebucket.data.model.SearchResult" />
+            name="movie"
+            type="com.vignesh.moviebucket.data.model.Movie" />
+
+        <variable
+            name="releaseYear"
+            type="String" />
+
+        <variable
+            name="runtime"
+            type="String" />
+
+        <variable
+            name="genre"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,9 +49,9 @@
             android:layout_width="64dp"
             android:layout_height="96dp"
             android:layout_marginStart="16dp"
-            android:contentDescription="@{result.title}"
+            android:contentDescription="@{movie.title}"
             android:scaleType="centerCrop"
-            app:image_path="@{result.posterPath}"
+            app:image_path="@{movie.posterPath}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,9 +62,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/poster_image"
-            app:layout_constraintEnd_toStartOf="@+id/arrow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/poster_image"
             app:layout_constraintTop_toTopOf="@+id/poster_image">
 
@@ -62,19 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="@{result.title}"
                 android:ellipsize="end"
                 android:singleLine="true"
+                android:text="@{movie.title}"
                 android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
                 tools:text="@tools:sample/full_names" />
-
-            <TextView
-                android:id="@+id/popularity_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{result.popularity}"
-                android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
-                tools:text="34.545" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -85,11 +90,41 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/year_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="@{result.releaseYear}"
+                    android:text="@{runtime}"
+                    android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
+                    tools:text="2h 20m" />
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/dot_background" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{genre}"
+                    android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
+                    tools:text="Action" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{releaseYear}"
                     android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
                     tools:text="@tools:sample/date/mmddyy" />
 
@@ -103,23 +138,12 @@
                     android:id="@+id/rating_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{result.rating}"
+                    android:text="@{movie.rating}"
                     android:textAppearance="@style/TextAppearance.MovieBucket.SearchResult.Subtitle"
                     tools:text="7.3/10" />
 
             </LinearLayout>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/arrow"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/open"
-            android:src="@drawable/ic_baseline_arrow_forward_24"
-            app:layout_constraintBottom_toBottomOf="@+id/result_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/result_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

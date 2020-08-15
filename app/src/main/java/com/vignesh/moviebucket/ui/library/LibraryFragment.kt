@@ -53,7 +53,7 @@ class LibraryFragment : Fragment() {
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
             val topInset = windowInsets.systemWindowInsetTop
-            view.layoutParams.height = topInset
+                    view.layoutParams.height = topInset
             view.requestLayout()
             return@setOnApplyWindowInsetsListener windowInsets
         }

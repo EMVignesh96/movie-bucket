@@ -16,17 +16,22 @@
 
 package com.vignesh.moviebucket.ui
 
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import android.content.Context
+import com.vignesh.moviebucket.R
 
-private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
+fun getRuntimeDisplayString(context: Context, runtimeMinutes: Int): String {
+    val hours = runtimeMinutes / 60
+    val min = runtimeMinutes % 60
+    val resource = context.resources
+    return "$hours${resource.getString(R.string.abbr_hours)} $min${resource.getString(R.string.abbr_minutes)}"
+}
 
-@BindingAdapter("app:image_path")
-fun setImage(view: ImageView, imagePath: String?) {
-    if (!imagePath.isNullOrEmpty()) {
-        val url = "$IMAGE_BASE_URL${"w500"}$imagePath"
-        Glide.with(view).load(url).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(view)
-    }
+fun getReleaseYear(releaseDate: String): String {
+    val parts = releaseDate.split("-")
+    return if (parts.size == 3) parts[0] else ""
+}
+
+fun getFirstGenre(genre: String): String {
+    val parts = genre.split("|")
+    return if (parts.isNotEmpty()) parts[0] else ""
 }

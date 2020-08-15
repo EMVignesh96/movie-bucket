@@ -46,4 +46,5 @@
     <string name="abbr_hours">h</string>
     <string name="abbr_minutes">m</string>
     <string name="tmdb">TMDb</string>
+    <string name="title_bucket">Bucket</string>
 </resources>
