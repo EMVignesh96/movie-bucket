@@ -24,6 +24,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentListBinding
@@ -55,6 +56,11 @@ class BucketListFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
+        bucketListAdapter.setOnItemClickListener { movieId ->
+            val action =
+                BucketListFragmentDirections.actionNavigationListToMovieDetailFragment(movieId)
+            findNavController().navigate(action)
+        }
         binding.bucketListRecycler.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = bucketListAdapter

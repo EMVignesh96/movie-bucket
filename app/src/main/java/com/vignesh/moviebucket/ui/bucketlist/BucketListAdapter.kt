@@ -30,6 +30,8 @@ import com.vignesh.moviebucket.ui.getFirstGenre
 import com.vignesh.moviebucket.ui.getReleaseYear
 import com.vignesh.moviebucket.ui.getRuntimeDisplayString
 
+private var TAG = BucketListAdapter::class.java.simpleName
+
 class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -39,7 +41,7 @@ class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private const val VIEW_TYPE_NO_ITEMS = 3
     }
 
-    private var dummyViewHeight = 0
+    private var onItemClicked: ((String) -> Unit)? = null
     private val movies = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -98,8 +100,8 @@ class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             VIEW_TYPE_DUMMY -> (holder as DummyViewHolder).bind()
-            VIEW_TYPE_TITLE -> (holder as TitleViewHolder).bind()
-            VIEW_TYPE_NO_ITEMS -> (holder as NoListViewHolder).bind()
+            VIEW_TYPE_TITLE -> (holder as TitleViewHolder)
+            VIEW_TYPE_NO_ITEMS -> (holder as NoListViewHolder)
             else -> (holder as BucketItemViewHolder).bind(movies[position - 2])
         }
     }
@@ -112,8 +114,8 @@ class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun setDummyViewHeight(height: Int) {
-        dummyViewHeight = height
+    fun setOnItemClickListener(l: ((String) -> Unit)?) {
+        onItemClicked = l
     }
 
     class DummyViewHolder(private val binding: ItemDummyBinding) :
@@ -129,19 +131,11 @@ class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class TitleViewHolder(binding: ItemTitleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+    class TitleViewHolder(binding: ItemTitleBinding) : RecyclerView.ViewHolder(binding.root)
 
-        }
-    }
+    class NoListViewHolder(binding: ItemNoListBinding) : RecyclerView.ViewHolder(binding.root)
 
-    class NoListViewHolder(binding: ItemNoListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-
-        }
-    }
-
-    class BucketItemViewHolder(private val binding: ItemBucketBinding) :
+    inner class BucketItemViewHolder(private val binding: ItemBucketBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             with(binding) {
@@ -149,6 +143,9 @@ class BucketListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 releaseYear = getReleaseYear(movie.releaseDate)
                 runtime = getRuntimeDisplayString(binding.root.context, movie.runtimeMinutes)
                 genre = getFirstGenre(movie.genre)
+                root.setOnClickListener {
+                    onItemClicked?.let { onItemClicked -> onItemClicked(movies[adapterPosition - 2].id) }
+                }
                 executePendingBindings()
             }
         }
