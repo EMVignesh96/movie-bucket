@@ -21,7 +21,14 @@ import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.model.SearchResult
 
 interface RemoteDataSource {
+
     suspend fun search(query: String): Result<List<SearchResult>>
-    suspend fun loadLibraries(): Result<List<Movie>>
+
     suspend fun getMovieDetails(id: String): Result<Movie>
+
+    suspend fun getUpcomingMovies(): Result<List<Movie>>
+
+    suspend fun getTopRatedMovies(): Result<List<Movie>>
+
+    suspend fun getPopularMovies(): Result<List<Movie>>
 }

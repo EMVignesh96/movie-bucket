@@ -23,7 +23,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
-private const val API_KEY = "<your-api-key-here>"
+private const val API_KEY = "d551e05f30303d59c88b1157b41f4c09"
 
 private val retrofit =
     Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(ScalarsConverterFactory.create())
@@ -33,6 +33,7 @@ interface TMDbApiService {
     @GET("search/movie")
     suspend fun search(
         @Query("query") query: String,
+        @Query("include_adult") includeAdult: Boolean = false,
         @Query("api_key") apiKey: String = API_KEY
     ): String
 
