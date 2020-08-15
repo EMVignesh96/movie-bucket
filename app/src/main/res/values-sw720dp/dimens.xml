@@ -20,4 +20,8 @@
     <dimen name="search_item_poster_height">120dp</dimen>
     <dimen name="search_item_poster_width">80dp</dimen>
     <dimen name="search_item_height">144dp</dimen>
+    <dimen name="detail_poster_width">448dp</dimen>
+    <dimen name="detail_poster_height">672dp</dimen>
+    <dimen name="detail_margin_start">128dp</dimen>
+    <dimen name="detail_margin_end">128dp</dimen>
 </resources>

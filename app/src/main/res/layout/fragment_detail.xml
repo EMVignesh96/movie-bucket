@@ -27,7 +27,9 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/detail_margin_start"
+        android:layout_marginEnd="@dimen/detail_margin_end">
 
         <ScrollView
             android:id="@+id/details_container"
@@ -51,8 +53,8 @@
 
                 <ImageView
                     android:id="@+id/poster_image"
-                    android:layout_width="256dp"
-                    android:layout_height="384dp"
+                    android:layout_width="@dimen/detail_poster_width"
+                    android:layout_height="@dimen/detail_poster_height"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
                     android:contentDescription="@{movie.title}"
