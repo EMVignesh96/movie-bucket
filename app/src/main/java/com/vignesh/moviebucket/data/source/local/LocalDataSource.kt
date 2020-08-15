@@ -53,4 +53,6 @@ interface LocalDataSource {
     fun observeMovie(movieId: String): LiveData<Result<Movie?>>
 
     fun observeBucketList(): LiveData<Result<List<Movie>>>
+
+    suspend fun isMoviesTableEmpty(): Result<Boolean>
 }

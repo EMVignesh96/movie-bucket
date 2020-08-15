@@ -77,4 +77,6 @@ class DefaultMovieRepository(
     override fun observeMovie(id: String) = localDataSource.observeMovie(id)
 
     override fun observeBucketList() = localDataSource.observeBucketList()
+
+    override suspend fun noMovies() = localDataSource.isMoviesTableEmpty()
 }

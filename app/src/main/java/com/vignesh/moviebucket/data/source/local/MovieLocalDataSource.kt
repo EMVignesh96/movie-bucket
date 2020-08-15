@@ -96,4 +96,8 @@ class MovieLocalDataSource(
     override fun observeBucketList(): LiveData<Result<List<Movie>>> {
         return moviesDao.observeBucketList().map { Result.Success(it) }
     }
+
+    override suspend fun isMoviesTableEmpty() =
+        if (moviesDao.getMovieCount() > 0) Result.Success(false)
+        else Result.Success(true)
 }

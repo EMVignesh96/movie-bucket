@@ -26,7 +26,11 @@ import com.vignesh.moviebucket.MovieBucketApp
 class DownloadLibrariesWorker(context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
-        (applicationContext as MovieBucketApp).movieRepository.loadLibraries()
+        val movieRepo = (applicationContext as MovieBucketApp).movieRepository
+        val noMovies = movieRepo.noMovies()
+        if (noMovies is com.vignesh.moviebucket.data.Result.Success && noMovies.data) {
+            movieRepo.loadLibraries()
+        }
         return Result.success()
     }
 

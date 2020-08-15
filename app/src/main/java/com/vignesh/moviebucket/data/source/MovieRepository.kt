@@ -52,5 +52,8 @@ interface MovieRepository {
     suspend fun markAsWatched(movieId: String)
 
     fun observeMovie(id: String): LiveData<Result<Movie?>>
+
     fun observeBucketList(): LiveData<Result<List<Movie>>>
+
+    suspend fun noMovies(): Result<Boolean>
 }
