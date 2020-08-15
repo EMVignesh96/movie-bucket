@@ -18,9 +18,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,10 +41,10 @@
                 android:textAppearance="?textAppearanceHeadline3" />
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/popular_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -53,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/title_popular"
                     android:textAppearance="?textAppearanceHeadline6" />
 
@@ -66,10 +67,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/top_rated_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -78,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/title_top_rated"
                     android:textAppearance="?textAppearanceHeadline6" />
 
@@ -91,10 +93,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/upcoming_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -103,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/title_upcoming"
                     android:textAppearance="?textAppearanceHeadline6" />
 
@@ -116,10 +119,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/liked_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -128,6 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/title_liked_movies"
                     android:textAppearance="?textAppearanceHeadline6" />
 
@@ -141,10 +145,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
                 android:id="@+id/watched_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -153,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/title_watched"
                     android:textAppearance="?textAppearanceHeadline6" />
 
