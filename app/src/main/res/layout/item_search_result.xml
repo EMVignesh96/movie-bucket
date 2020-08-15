@@ -27,15 +27,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="104dp"
+        android:layout_height="@dimen/search_item_height"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
 
         <ImageView
             android:id="@+id/poster_image"
-            android:layout_width="64dp"
-            android:layout_height="96dp"
+            android:layout_width="@dimen/search_item_poster_width"
+            android:layout_height="@dimen/search_item_poster_height"
             android:layout_marginStart="16dp"
             android:contentDescription="@{result.title}"
             android:scaleType="centerCrop"

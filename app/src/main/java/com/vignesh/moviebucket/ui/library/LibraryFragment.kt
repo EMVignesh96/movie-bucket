@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.vignesh.moviebucket.EventObserver
 import com.vignesh.moviebucket.R
 import com.vignesh.moviebucket.databinding.FragmentLibraryBinding
@@ -53,7 +53,7 @@ class LibraryFragment : Fragment() {
 
         binding.topView.setOnApplyWindowInsetsListener { view, windowInsets ->
             val topInset = windowInsets.systemWindowInsetTop
-                    view.layoutParams.height = topInset
+            view.layoutParams.height = topInset
             view.requestLayout()
             return@setOnApplyWindowInsetsListener windowInsets
         }
@@ -89,10 +89,15 @@ class LibraryFragment : Fragment() {
     private fun observeData() {
 
         with(viewModel) {
+            val itemsPerRow = requireContext().resources.getInteger(R.integer.library_items_per_row)
             popularMovies.observe(viewLifecycleOwner, Observer { popularMovies ->
                 if (popularMovies.isNotEmpty()) {
                     binding.popularLayout.visibility = View.VISIBLE
                     popularMoviesAdapter.setData(popularMovies)
+                    if (popularMovies.size >= 2 * itemsPerRow) {
+                        binding.popularMoviesRecycler.layoutManager =
+                            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                    }
                 }
             })
 
@@ -100,6 +105,10 @@ class LibraryFragment : Fragment() {
                 if (topRatedMovies.isNotEmpty()) {
                     binding.topRatedLayout.visibility = View.VISIBLE
                     topRatedMoviesAdapter.setData(topRatedMovies)
+                    if (topRatedMovies.size >= 2 * itemsPerRow) {
+                        binding.topRatedMoviesRecycler.layoutManager =
+                            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                    }
                 }
             })
 
@@ -107,6 +116,10 @@ class LibraryFragment : Fragment() {
                 if (upcomingMovies.isNotEmpty()) {
                     binding.upcomingLayout.visibility = View.VISIBLE
                     upcomingMoviesAdapter.setData(upcomingMovies)
+                    if (upcomingMovies.size >= 2 * itemsPerRow) {
+                        binding.upcomingMoviesRecycler.layoutManager =
+                            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                    }
                 }
             })
 
@@ -114,6 +127,10 @@ class LibraryFragment : Fragment() {
                 if (likedMovies.isNotEmpty()) {
                     binding.likedLayout.visibility = View.VISIBLE
                     likedMoviesAdapter.setData(likedMovies)
+                    if (likedMovies.size >= 2 * itemsPerRow) {
+                        binding.likedMoviesRecycler.layoutManager =
+                            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                    }
                 }
             })
 
@@ -121,6 +138,10 @@ class LibraryFragment : Fragment() {
                 if (watchedMovies.isNotEmpty()) {
                     binding.watchedLayout.visibility = View.VISIBLE
                     watchedMoviesAdapter.setData(watchedMovies)
+                    if (watchedMovies.size >= 2 * itemsPerRow) {
+                        binding.watchedMoviesRecycler.layoutManager =
+                            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                    }
                 }
             })
         }
@@ -129,45 +150,50 @@ class LibraryFragment : Fragment() {
     private fun setUpRecyclerViews() {
         with(binding) {
             popularMoviesRecycler.apply {
-                layoutManager = LinearLayoutManager(
+                layoutManager = GridLayoutManager(
                     context,
-                    LinearLayoutManager.HORIZONTAL,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
                     false
                 )
                 adapter = popularMoviesAdapter
             }
 
             topRatedMoviesRecycler.apply {
-                layoutManager = LinearLayoutManager(
+                layoutManager = GridLayoutManager(
                     context,
-                    LinearLayoutManager.HORIZONTAL,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
                     false
                 )
                 adapter = topRatedMoviesAdapter
             }
 
             upcomingMoviesRecycler.apply {
-                layoutManager = LinearLayoutManager(
+                layoutManager = GridLayoutManager(
                     context,
-                    LinearLayoutManager.HORIZONTAL,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
                     false
                 )
                 adapter = upcomingMoviesAdapter
             }
 
             likedMoviesRecycler.apply {
-                layoutManager = LinearLayoutManager(
+                layoutManager = GridLayoutManager(
                     context,
-                    LinearLayoutManager.HORIZONTAL,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
                     false
                 )
                 adapter = likedMoviesAdapter
             }
 
             watchedMoviesRecycler.apply {
-                layoutManager = LinearLayoutManager(
+                layoutManager = GridLayoutManager(
                     context,
-                    LinearLayoutManager.HORIZONTAL,
+                    1,
+                    GridLayoutManager.HORIZONTAL,
                     false
                 )
                 adapter = watchedMoviesAdapter
