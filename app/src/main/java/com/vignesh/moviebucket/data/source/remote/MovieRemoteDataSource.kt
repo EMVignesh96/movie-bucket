@@ -61,15 +61,6 @@ object MovieRemoteDataSource : RemoteDataSource {
         }
     }
 
-    override suspend fun loadLibraries(): Result<List<Movie>> {
-        val lib = mutableListOf<Movie>().apply {
-            addAll(getPopularMovies())
-            addAll(getTopRatedMovies())
-            addAll(getUpcomingMovies())
-        }
-        return Result.Success(lib)
-    }
-
     override suspend fun getMovieDetails(id: String): Result<Movie> {
         return try {
             val movie = getMovieDetails(id, LIB_TYPE_NONE)
@@ -79,40 +70,40 @@ object MovieRemoteDataSource : RemoteDataSource {
         }
     }
 
-    private suspend fun getUpcomingMovies(): List<Movie> {
+    override suspend fun getUpcomingMovies(): Result<List<Movie>> {
         val upcoming = mutableListOf<Movie>()
         try {
             val response = JSONObject(TMDbApi.retrofitService.getUpcomingMovies())
             val results = response.getJSONArray(RESULTS)
             upcoming.addAll(getMovieList(results, LIB_TYPE_UPCOMING))
         } catch (e: Exception) {
-            return upcoming
+            return Result.Error(e)
         }
-        return upcoming
+        return Result.Success(upcoming)
     }
 
-    private suspend fun getTopRatedMovies(): List<Movie> {
+    override suspend fun getTopRatedMovies(): Result<List<Movie>> {
         val topRatedMovies = mutableListOf<Movie>()
         try {
             val response = JSONObject(TMDbApi.retrofitService.getTopRatedMovies())
             val results = response.getJSONArray(RESULTS)
             topRatedMovies.addAll(getMovieList(results, LIB_TYPE_TOP_RATED))
         } catch (e: Exception) {
-            return topRatedMovies
+            return Result.Error(e)
         }
-        return topRatedMovies
+        return Result.Success(topRatedMovies)
     }
 
-    private suspend fun getPopularMovies(): List<Movie> {
+    override suspend fun getPopularMovies(): Result<List<Movie>> {
         val popularMovies = mutableListOf<Movie>()
         try {
             val response = JSONObject(TMDbApi.retrofitService.getPopularMovies())
             val results = response.getJSONArray(RESULTS)
             popularMovies.addAll(getMovieList(results, LIB_TYPE_POPULAR))
         } catch (e: Exception) {
-            return popularMovies
+            return Result.Error(e)
         }
-        return popularMovies
+        return Result.Success(popularMovies)
     }
 
     private suspend fun getMovieList(results: JSONArray, type: Int): List<Movie> {

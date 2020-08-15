@@ -16,6 +16,7 @@
 
 package com.vignesh.moviebucket.data.source
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
@@ -56,4 +57,6 @@ interface MovieRepository {
     fun observeBucketList(): LiveData<Result<List<Movie>>>
 
     suspend fun noMovies(): Result<Boolean>
+
+    suspend fun loadLocalLibrary(context: Context)
 }

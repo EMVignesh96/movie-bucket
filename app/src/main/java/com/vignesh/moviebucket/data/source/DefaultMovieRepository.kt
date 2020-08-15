@@ -16,6 +16,7 @@
 
 package com.vignesh.moviebucket.data.source
 
+import android.content.Context
 import com.vignesh.moviebucket.data.Result
 import com.vignesh.moviebucket.data.model.Movie
 import com.vignesh.moviebucket.data.source.local.LocalDataSource
@@ -42,7 +43,13 @@ class DefaultMovieRepository(
     override suspend fun search(query: String) = remoteDataSource.search(query)
 
     override suspend fun loadLibraries() {
-        val result = remoteDataSource.loadLibraries()
+        var result = remoteDataSource.getPopularMovies()
+        if (result is Result.Success) localDataSource.insertMovies(result.data)
+
+        result = remoteDataSource.getTopRatedMovies()
+        if (result is Result.Success) localDataSource.insertMovies(result.data)
+
+        result = remoteDataSource.getUpcomingMovies()
         if (result is Result.Success) localDataSource.insertMovies(result.data)
     }
 
@@ -79,4 +86,7 @@ class DefaultMovieRepository(
     override fun observeBucketList() = localDataSource.observeBucketList()
 
     override suspend fun noMovies() = localDataSource.isMoviesTableEmpty()
+
+    override suspend fun loadLocalLibrary(context: Context) =
+        localDataSource.loadLocalLibrary(context)
 }

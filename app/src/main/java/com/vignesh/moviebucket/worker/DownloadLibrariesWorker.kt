@@ -29,6 +29,8 @@ class DownloadLibrariesWorker(context: Context, params: WorkerParameters) :
         val movieRepo = (applicationContext as MovieBucketApp).movieRepository
         val noMovies = movieRepo.noMovies()
         if (noMovies is com.vignesh.moviebucket.data.Result.Success && noMovies.data) {
+            movieRepo.loadLocalLibrary(applicationContext)
+        } else {
             movieRepo.loadLibraries()
         }
         return Result.success()
