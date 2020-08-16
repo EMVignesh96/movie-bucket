@@ -54,7 +54,7 @@ interface MoviesDao {
     @Query("UPDATE movies SET inBucket = 0 WHERE id = :movieId")
     suspend fun removeFromBucket(movieId: String)
 
-    @Query("UPDATE movies SET inBucket = 1 WHERE id = :movieId")
+    @Query("UPDATE movies SET inBucket = 1, isWatched = 0 WHERE id = :movieId")
     suspend fun addToBucket(movieId: String)
 
     @Query("UPDATE movies SET isLiked = 0 WHERE id = :movieId")
@@ -66,7 +66,7 @@ interface MoviesDao {
     @Query("UPDATE movies SET isWatched = 0 WHERE id = :movieId")
     suspend fun unwatchMovie(movieId: String)
 
-    @Query("UPDATE movies SET isWatched = 1 WHERE id = :movieId")
+    @Query("UPDATE movies SET isWatched = 1, inBucket = 0 WHERE id = :movieId")
     suspend fun markAsWatched(movieId: String)
 
     @Query("SELECT * FROM movies WHERE id = :movieId")
