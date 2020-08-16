@@ -26,13 +26,14 @@ import com.vignesh.moviebucket.data.model.Movie
 
 @Dao
 interface MoviesDao {
-    @Query("SELECT * FROM movies WHERE libraryItemType = 1 ORDER BY popularity")
+
+    @Query("SELECT * FROM movies WHERE libraryItemType = 1 ORDER BY popularity DESC")
     fun observePopularMovies(): LiveData<List<Movie>>
 
-    @Query("SELECT * FROM movies WHERE libraryItemType = 2 ORDER BY popularity")
+    @Query("SELECT * FROM movies WHERE libraryItemType = 2 ORDER BY popularity DESC")
     fun observeTopRatedMovies(): LiveData<List<Movie>>
 
-    @Query("SELECT * FROM movies WHERE libraryItemType = 3 ORDER BY popularity")
+    @Query("SELECT * FROM movies WHERE libraryItemType = 3 ORDER BY popularity DESC")
     fun observeUpcomingMovies(): LiveData<List<Movie>>
 
     @Query("SELECT * FROM movies WHERE isLiked = 1")
@@ -71,7 +72,7 @@ interface MoviesDao {
     @Query("SELECT * FROM movies WHERE id = :movieId")
     fun observeMovies(movieId: String): LiveData<Movie?>
 
-    @Query("SELECT * FROM movies WHERE inBucket = 1")
+    @Query("SELECT * FROM movies WHERE inBucket = 1 ORDER BY popularity DESC")
     fun observeBucketList(): LiveData<List<Movie>>
 
     @Query("SELECT COUNT(id) FROM movies")

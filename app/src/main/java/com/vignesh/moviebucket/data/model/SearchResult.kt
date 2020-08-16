@@ -19,7 +19,7 @@ package com.vignesh.moviebucket.data.model
 data class SearchResult(
     val id: String,
     val title: String,
-    val popularity: String,
+    val popularity: Double,
     val releaseYear: String,
     val rating: String,
     val posterPath: String
