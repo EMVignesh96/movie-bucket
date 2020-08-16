@@ -54,6 +54,7 @@
                 android:background="@null"
                 android:hint="@string/search_for_a_movie"
                 android:imeOptions="actionSearch"
+                android:minHeight="48dp"
                 android:singleLine="true" />
 
         </LinearLayout>
