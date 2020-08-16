@@ -40,7 +40,7 @@ object MovieRemoteDataSource : RemoteDataSource {
     private const val RUNTIME = "runtime"
     private const val OVERVIEW = "overview"
 
-    private const val LIB_TYPE_NONE = 1
+    private const val LIB_TYPE_NONE = 0
     private const val LIB_TYPE_POPULAR = 1
     private const val LIB_TYPE_TOP_RATED = 2
     private const val LIB_TYPE_UPCOMING = 3
@@ -135,7 +135,7 @@ object MovieRemoteDataSource : RemoteDataSource {
             val title = getString(TITLE)
             val releaseDate = getString(RELEASE_DATE)
             val runtime = getInt(RUNTIME)
-            val popularity = getString(POPULARITY)
+            val popularity = getString(POPULARITY).toDouble()
             val rating = getString(RATING)
             val overView = getString(OVERVIEW)
             val posterPath = getString(POSTER_PATH)
@@ -190,7 +190,7 @@ object MovieRemoteDataSource : RemoteDataSource {
             SearchResult(
                 optString(MOVIE_ID),
                 getString(TITLE),
-                optString(POPULARITY),
+                optString(POPULARITY).toDouble(),
                 releaseYear,
                 getString(RATING),
                 getString(POSTER_PATH)

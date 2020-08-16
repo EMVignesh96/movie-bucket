@@ -155,7 +155,7 @@ class MovieLocalDataSource(
                 getString(TITLE),
                 getString(RELEASE_DATE),
                 getInt(RUNTIME),
-                getString(POPULARITY),
+                getString(POPULARITY).toDouble(),
                 getString(RATING),
                 getString(GENRE),
                 getString(OVERVIEW),

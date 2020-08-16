@@ -25,7 +25,7 @@ data class Movie(
     val title: String,
     val releaseDate: String,
     val runtimeMinutes: Int,
-    val popularity: String,
+    val popularity: Double,
     val rating: String,
     val genre: String,
     val overView: String,
